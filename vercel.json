@@ -1,6 +1,15 @@
 {
   "routes": [
     { "src": "/", "dest": "/Onboarding/splash.html" },
+    { "src": "/select-role", "dest": "/Onboarding/select-role.html" },
+    { "src": "/employee-login", "dest": "/Onboarding/employee-login.html" },
+    { "src": "/employee-signup", "dest": "/Onboarding/employee-signup.html" },
+    { "src": "/manager-login", "dest": "/Onboarding/manager-login.html" },
+    { "src": "/manager-signup", "dest": "/Onboarding/manager-signup.html" },
+    { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
+    { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
+    { "src": "/learn-more", "dest": "/learn-more.html" },
+    { "src": "/about-us", "dest": "/about-us.html" },
     { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
     { "src": "/learn-more", "dest": "/learn-more.html" },
     { "src": "/about-us", "dest": "/about-us.html" }
