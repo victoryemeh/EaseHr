@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave Management - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", "Graphik Trial", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        position: relative;
+        width: 402px;
+        height: 896px;
+        background: #f5f7fa;
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* HEADER */
+      .header {
+        background: #f5f7fa;
+        padding: 16px 32px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+      }
+
+      .header-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .header-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .header-subtitle {
+        font-size: 14px;
+        font-weight: 300;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      /* MAIN CONTENT */
+      .content {
+        flex: 1;
+        padding: 24px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      /* EMPLOYEE PROFILE CARD */
+      .profile-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .profile-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 14px;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .profile-name {
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .profile-detail {
+        font-weight: 400;
+        font-size: 14px;
+        display: flex;
+        gap: 4px;
+      }
+
+      .profile-label {
+        font-weight: 400;
+      }
+
+      .profile-value {
+        font-weight: 400;
+      }
+
+      /* LEAVE BALANCE CARD */
+      .balance-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0f172a;
+        font-family: "Inter", sans-serif;
+      }
+
+      .balance-item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .balance-label {
+        font-size: 14px;
+        color: #000;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+      }
+
+      .progress-bar-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .progress-bar {
+        flex: 1;
+        height: 10px;
+        background: #f5f7fa;
+        border: 1px solid #22c55e;
+        border-radius: 30px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #22c55e;
+        border-radius: 30px;
+        width: 33%;
+      }
+
+      .progress-text {
+        font-size: 12px;
+        font-weight: 600;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+        white-space: nowrap;
+        min-width: 70px;
+        text-align: right;
+      }
+
+      /* APPLY FOR LEAVE BUTTON */
+      .btn-apply-leave {
+        background: #14b8a6;
+        border: none;
+        border-radius: 8px;
+        padding: 16px 24px;
+        width: 100%;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+        font-size: 16.7px;
+        font-weight: 500;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+        transition: background 0.3s, transform 0.1s;
+        margin-top: auto;
+      }
+
+      .btn-apply-leave:hover {
+        background: #0d9488;
+        transform: scale(1.02);
+      }
+
+      .btn-apply-leave:active {
+        transform: scale(0.98);
+      }
+
+      .btn-apply-leave img {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* BOTTOM NAVIGATION */
+      .bottom-nav {
+        background: #f5f7fa;
+        border-top: 1px solid rgba(15, 23, 42, 0.05);
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        height: 108px;
+        position: relative;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex: 1;
+        text-decoration: none;
+        color: #0f172a;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 12px;
+        font-weight: 300;
+        font-family: "Graphik Trial", sans-serif;
+        transition: color 0.3s;
+      }
+
+      .nav-item img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-item.active {
+        color: #14b8a6;
+      }
+
+      .nav-item.active img {
+        filter: invert(62%) sepia(38%) saturate(1200%) hue-rotate(129deg);
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .container {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <di class="container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-content">
+          <div class="header-title">Leave Management</div>
+          <div class="header-subtitle">Manage your Leave Easily</div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Employee Profile Card -->
+        <div class="profile-card">
+          <div class="profile-avatar">
+            <img
+              src="https://www.figma.com/api/mcp/asset/6a04ddbb-4b87-4a92-9737-b757d03cd6d1"
+              alt="Avatar"
+            />
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">Name: Princess Favour</div>
+            <div class="profile-detail">
+              <span class="profile-label">Position:</span>
+              <span class="profile-value">Product Designer</span>
+            </div>
+            <div class="profile-detail">
+              <span class="profile-label">Department:</span>
+              <span class="profile-value">Product Design</span>
+            </div>
+            <div class="profile-detail">
+              <span class="profile-label">ID Number:</span>
+              <span class="profile-value">PD-2025</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leave Balance Card -->
+        <div class="balance-card">
+          <div class="card-title">Leave Balance</div>
+
+          <!-- Total Leave -->
+          <div class="balance-item">
+            <div class="balance-label">Total Leave</div>
+            <div class="progress-bar-container">
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
+              </div>
+              <div class="progress-text">20/60days</div>
+            </div>
+          </div>
+
+          <!-- Used Leave -->
+          <div class="balance-item">
+            <div class="balance-label">Used Leave</div>
+            <div class="progress-bar-container">
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
+              </div>
+              <div class="progress-text">20/60days</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apply For Leave Button -->
+        <!-- <button class="btn-apply-leave" onclick="handleApplyLeave()">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8510bb13-128d-48bb-a9e9-c88b7c566d24"
+            alt="download"
+          />
+          Apply For Leave
+        </button> -->
+        <a href="/Employee/leave-application.html" class="btn-apply-leave">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8510bb13-128d-48bb-a9e9-c88b7c566d24"
+            alt="download"
+          />
+          Apply For Leave
+        </a>
+      </div>
+
+      <!-- Bottom Navigation -->
+      
+        <nav class="bottom-nav" data-node-id="1577:8229">
+        <div class="nav-item active">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/f177fc48-3922-4f68-af3b-44385c5a1878"
+              alt="Home"
+            />
+          </div>
+          <span class="nav-label">Home</span>
+        </div>
+        <a class="nav-item" href="/Employee/active-session.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/4b83d0f6-3a11-4959-8182-a50516c8b189"
+              alt="Time Clock"
+            />
+          </div>
+          <span class="nav-label">Time Clock</span>
+        </a>
+        <a class="nav-item" href="/Employee/leave-application.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/dae2fdba-f550-4aa7-8c42-4c042de4ee98"
+              alt="Leave"
+            />
+          </div>
+          <span class="nav-label">Leave</span>
+        </a>
+        <a class="nav-item" href="/Employee/employee-notification.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/e5386640-feba-4f2a-b288-91779562fc3a"
+              alt="Notification"
+            />
+          </div>
+          <span class="nav-label">Notification</span>
+        </a>
+        <a class="nav-item" href="/Employee/employee-profile.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/4684ea2c-aa99-4a87-8b04-9252a945f693"
+              alt="Profile"
+            />
+          </div>
+          <span class="nav-label active">Profile</span>
+        </a>
+      </nav>
+      
+    </div>
+
+    <script>
+      function handleApplyLeave() {
+        alert("Leave application form would open here");
+        console.log("Apply for leave clicked");
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+        document.querySelector(".status-bar-time").textContent = time;
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+
+      // Initialize
+      updateTime();
+      setInterval(updateTime, 60000); // Update status bar time every minute
+    </script>
+  </body>
+</html>

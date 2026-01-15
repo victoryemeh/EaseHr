@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ===========================
+           Onboarding Container
+           =========================== */
+.onboarding-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  background-color: #f5f7fa;
+
+  overflow: hidden;
+}
+
+/* ===========================
+           Logo
+           =========================== */
+.logo-header {
+  position: absolute;
+  top: calc(8.33% + 21.17px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 215px;
+  height: 66px;
+}
+
+.logo-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===========================
+           Illustration
+           =========================== */
+.illustration-section {
+  position: absolute;
+  top: calc(16.67% + 46.33px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.illustration-section img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ===========================
+           Onboarding Text
+           =========================== */
+.onboarding-text {
+  display: flex;
+  width: 342px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.onboarding-text h2 {
+  font-family: "Graphik Trial", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  margin: 0;
+}
+
+.onboarding-text p {
+  font-family: "Graphik Trial", sans-serif;
+  font-weight: 200;
+  font-size: 16.7px;
+  line-height: 22.4px;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ===========================
+           Loading Dots (Progress)
+           =========================== */
+.loading-dots {
+  position: absolute;
+  top: calc(58.33% + 40.65px);
+  left: calc(25% + 74.5px);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.loading-dot.active {
+  width: 24px;
+  background-color: #14b8a6;
+}
+
+/* ===========================
+           Action Buttons
+           =========================== */
+.btn-employee {
+  position: absolute;
+  top: calc(66.67% + 17.33px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 353px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  background-color: #14b8a6;
+  border: none;
+  border-radius: 8px;
+  font-family: "Graphik Trial", sans-serif;
+  font-weight: 500;
+  font-size: 16.7px;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-employee:hover {
+  background-color: #12a594;
+  transform: translateX(-50%) scale(0.98);
+}
+
+.btn-manager {
+  position: absolute;
+  top: calc(75% + 12.5px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 353px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  background-color: transparent;
+  border: 1px solid #14b8a6;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16.7px;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-manager:hover {
+  background-color: rgba(20, 184, 166, 0.1);
+  transform: translateX(-50%) scale(0.98);
+}
+
+/* ===========================
+           Login Link
+           =========================== */
+.login-link {
+  position: absolute;
+  top: calc(83.33% + 23.67px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 20px;
+  font-family: "Graphik Trial", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.login-link .link-text {
+  font-weight: 300;
+}
+
+.login-link .link-action {
+  font-weight: 500;
+  color: #14b8a6;
+  text-decoration: underline;
+}
+
+/* ===========================
+           Home Indicator
+           =========================== */
+.home-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 1px;
+  width: 400px;
+  height: 21px;
+}
+
+.home-indicator-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 123px;
+  height: 5px;
+  background-color: black;
+  border-radius: 100px;
+}
+
+/* ===========================
+           Animations
+           =========================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.onboarding-text,
+.btn-employee,
+.btn-manager,
+.login-link {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.btn-employee {
+  animation-delay: 0.2s;
+}
+
+.btn-manager {
+  animation-delay: 0.3s;
+}
+
+.login-link {
+  animation-delay: 0.4s;
+}
+
+/* ===========================
+           Responsive
+           =========================== */
+@media (max-width: 768px) {
+  .onboarding-container {
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .onboarding-text,
+  .btn-employee,
+  .btn-manager {
+    width: calc(100% - 48px);
+  }
+}

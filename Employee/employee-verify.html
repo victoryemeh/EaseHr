@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Account - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        /* background-color: #4a5568; */
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+      }
+
+      .mobile-container {
+        max-width: 600px;
+        width: 100%;
+        background: white;
+        overflow: hidden;
+
+        /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
+      }
+
+      .header {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo-image {
+        width: 150px;
+        height: auto;
+        margin-top: 6px;
+        margin-bottom: 48px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        object-fit: contain;
+      }
+
+      .logo-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        position: relative;
+        gap: 8px;
+      }
+      .content {
+        padding: 0 20px 20px;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 40px 0 20px;
+      }
+
+      .verification-info {
+        text-align: center;
+        color: #6b7280;
+        font-size: 14px;
+        margin: 20px 0 30px;
+      }
+
+      .code-inputs {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin: 30px 0;
+      }
+
+      .code-input {
+        width: 45px;
+        height: 50px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 0;
+        outline: none;
+        transition: all 0.3s;
+      }
+
+      .code-input:focus {
+        border-color: #14b8a6;
+      }
+
+      .timer {
+        text-align: center;
+        margin: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .resend-text {
+        text-align: center;
+        font-size: 14px;
+        color: #6b7280;
+        margin: 20px 0;
+      }
+
+      .resend-text a {
+        color: #14b8a6;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 16px;
+        background: #14b8a6;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+      }
+
+      .btn-primary:hover {
+        background: #0f9b8a;
+      }
+
+      .home-indicator {
+        height: 5px;
+        width: 134px;
+        background: #1f2937;
+        border-radius: 100px;
+        margin: 10px auto;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .mobile-container {
+          border-radius: 20px;
+        }
+
+        .page-title {
+          font-size: 20px;
+        }
+
+        .code-input {
+          width: 40px;
+          height: 45px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mobile-container">
+      <div class="logo-section">
+        <img
+          src="../assets/Big EaseHr logo.png"
+          alt="EaseHR Logo"
+          class="logo-image"
+        />
+      </div>
+
+      <div class="content" style="margin-top: -80px">
+        <h1 class="page-title">Verify Your Account</h1>
+        <p class="verification-info">
+          We have sent a 6-digit verification code<br />
+          to employee@gmail.com
+        </p>
+
+        <div class="code-inputs">
+          <input type="text" class="code-input" maxlength="1" id="code1" />
+          <input type="text" class="code-input" maxlength="1" id="code2" />
+          <input type="text" class="code-input" maxlength="1" id="code3" />
+          <input type="text" class="code-input" maxlength="1" id="code4" />
+          <input type="text" class="code-input" maxlength="1" id="code5" />
+          <input type="text" class="code-input" maxlength="1" id="code6" />
+        </div>
+
+        <div class="timer">
+          <span> </span>
+          <span id="timer">00:59</span>
+        </div>
+
+        <p class="resend-text">
+          Didn't receive a code? <a href="#" onclick="resendCode()">Resend</a>
+        </p>
+
+        <button type="submit" class="btn-primary">Verify</button>
+      </div>
+
+      <!-- <div class="home-indicator"></div> -->
+    </div>
+
+    <script>
+      // Auto-tab for verification code inputs
+      const codeInputs = document.querySelectorAll(".code-input");
+      codeInputs.forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+          if (e.target.value.length === 1 && index < codeInputs.length - 1) {
+            codeInputs[index + 1].focus();
+          }
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !e.target.value && index > 0) {
+            codeInputs[index - 1].focus();
+          }
+        });
+      });
+
+      // Countdown timer
+      let timeLeft = 59;
+      const timerElement = document.getElementById("timer");
+
+      function updateTimer() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerElement.textContent = `${String(minutes).padStart(
+          2,
+          "0"
+        )}:${String(seconds).padStart(2, "0")}`;
+
+        if (timeLeft > 0) {
+          timeLeft--;
+          setTimeout(updateTimer, 1000);
+        }
+      }
+
+      updateTimer();
+
+      function resendCode() {
+        timeLeft = 59;
+        updateTimer();
+        alert("Verification code resent!");
+      }
+    </script>
+  </body>
+</html>

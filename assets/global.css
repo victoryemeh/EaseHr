@@ -1,0 +1,211 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #f6f7f9;
+  margin: 0;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+form {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* =============================
+   Global Form Styles (Centralized)
+   Apply across all pages
+============================= */
+:root {
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-primary: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-focus: 0 0 0 3px rgba(20, 184, 166, 0.15);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+/* Wrapper that can contain icons + input */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  transition: border-color 120ms ease, box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.input-wrapper input,
+.input-wrapper select,
+.input-wrapper textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  min-width: 0; /* prevent overflow in flex */
+}
+
+.input-wrapper textarea {
+  resize: vertical;
+}
+
+.input-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.eye-icon {
+  padding-right: 12px;
+  cursor: pointer;
+  color: var(--color-muted);
+}
+
+/* Standalone input style if no wrapper is used */
+.input,
+input[type="text"].input,
+input[type="email"].input,
+input[type="password"].input,
+input[type="tel"].input,
+input[type="date"].input,
+select.input,
+textarea.input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Helper and validation text */
+.helper-text {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.error-text {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--color-danger);
+}
+
+/* Invalid field states */
+.field-invalid .input-wrapper {
+  border-color: var(--color-danger);
+}
+
+.field-invalid .input,
+.input.is-invalid {
+  border-color: var(--color-danger);
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 120ms ease, opacity 120ms ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-600);
+}
+
+.btn-primary:disabled,
+.btn-primary[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* Message helpers */
+.message {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+}
+
+.message.error {
+  background: #fee;
+  color: #c33;
+}
+
+.message.success {
+  background: #efe;
+  color: #3c3;
+}

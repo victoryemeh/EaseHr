@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Leave Status - EaseHR</title>
+    <style>
+      @font-face {
+        font-family: "Graphik Trial";
+        src: url("https://fonts.cdnfonts.com/css/graphik-trial");
+      }
+      @font-face {
+        font-family: "Inter";
+        src: url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+      }
+      @font-face {
+        font-family: "SF Pro";
+        src: url("https://fonts.cdnfonts.com/css/sf-pro-display");
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Graphik Trial", sans-serif;
+        background: #f5f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 16px 0;
+      }
+
+      .container {
+        width: 402px;
+        min-height: 868px;
+        background: #f5f7fa;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 24px 24px 120px 24px;
+        gap: 20px;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+      }
+
+      /* Header Section */
+      .header-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+      }
+
+      .header-text {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .header-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+        color: #0f172a;
+      }
+
+      .header-subtitle {
+        position: relative;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        color: #0f172a;
+        margin-top: -4px;
+      }
+
+      /* Calendar */
+      .calendar-widget {
+        background: transparent;
+        border-radius: 8px;
+        padding: 8px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .calendar-month {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .month-text {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 500;
+        font-size: 12px;
+        color: #0f172a;
+        padding: 2px 4px;
+        border-radius: 8px;
+      }
+
+      .month-arrow {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transform: scaleY(-1);
+      }
+
+      .calendar-controls {
+        display: flex;
+        gap: 8px;
+      }
+
+      .control-arrow {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      .control-arrow.prev {
+        transform: rotate(180deg);
+      }
+
+      .calendar-days {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .day-label {
+        width: 40px;
+        padding: 2px 4px;
+        border-radius: 8px;
+        text-align: center;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: #0f172a;
+      }
+
+      .day-label.active {
+        background: #14b8a6;
+      }
+
+      /* Leave Management Section */
+      .leave-section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+      }
+
+      /* Filter Buttons */
+      .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .filter-buttons {
+        display: flex;
+        gap: 8px;
+        position: relative;
+      }
+
+      .filter-btn {
+        height: 32px;
+        padding: 8px 16px;
+        border-radius: 16px;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .filter-btn.pending {
+        background: #f59e0b;
+        color: #000;
+      }
+
+      .filter-btn.pending.active {
+        background: #f59e0b;
+      }
+
+      .filter-btn.approved {
+        background: transparent;
+        color: #000;
+        border: 1px solid #22c55e;
+      }
+
+      .filter-btn.approved.active {
+        background: #22c55e;
+        color: #fff;
+        border: 1px solid #22c55e;
+      }
+
+      .filter-btn.declined {
+        background: transparent;
+        color: #000;
+        border: 1px solid #ef4444;
+      }
+
+      .filter-btn.declined.active {
+        background: #ef4444;
+        color: #fff;
+        border: 1px solid #ef4444;
+      }
+
+      .filter-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: #0f172a;
+      }
+
+      /* Application Details Card */
+      .application-card {
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        position: relative;
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .card-title {
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: #0f172a;
+      }
+
+      .expand-btn {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transform: rotate(90deg);
+        border: none;
+        background: transparent;
+        padding: 0;
+      }
+
+      .expand-btn img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .detail-row {
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        height: 25px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .detail-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #000;
+      }
+
+      .detail-value {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: #000;
+      }
+
+      .status-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .status-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #000;
+      }
+
+      .status-badge {
+        background: #f59e0b;
+        padding: 8px 16px;
+        border-radius: 16px;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: #000;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+      }
+
+      .status-badge.approved {
+        background: #22c55e;
+      }
+
+      .status-badge.declined {
+        background: #ef4444;
+      }
+
+      /* Checkmark Icon */
+      .checkmark-icon {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
+
+      .checkmark-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 378px;
+        height: 108px;
+        background: #f5f7fa;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px;
+        border-top: 0px solid #0f172a;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 300;
+        font-size: 12px;
+        color: #0f172a;
+        text-align: center;
+      }
+
+      .nav-item.active .nav-label {
+        color: #14b8a6;
+      }
+
+      /* Hidden class for filtering */
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <main class="content">
+        <!-- Header Section -->
+        <div class="header-section">
+          <div class="header-text">
+            <span class="header-title">Track Leave Status</span>
+            <div class="header-subtitle">
+              Monitor the status your leave Request.
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="calendar-widget">
+          <div class="calendar-header">
+            <div class="calendar-month">
+              <span class="month-text" id="currentMonth">December 2025</span>
+              <img
+                src="https://www.figma.com/api/mcp/asset/eacccb47-06d1-4059-b76a-4ef435917b30"
+                alt="Dropdown"
+                class="month-arrow"
+              />
+            </div>
+            <div class="calendar-controls">
+              <img
+                src="https://www.figma.com/api/mcp/asset/eacccb47-06d1-4059-b76a-4ef435917b30"
+                alt="Previous"
+                class="control-arrow prev"
+                onclick="previousWeek()"
+              />
+              <img
+                src="https://www.figma.com/api/mcp/asset/eacccb47-06d1-4059-b76a-4ef435917b30"
+                alt="Next"
+                class="control-arrow"
+                onclick="nextWeek()"
+              />
+            </div>
+          </div>
+          <div class="calendar-days">
+            <div class="day-label">Sun</div>
+            <div class="day-label">Mon</div>
+            <div class="day-label">Tue</div>
+            <div class="day-label">Wed</div>
+            <div class="day-label">Thur</div>
+            <div class="day-label active">Fri</div>
+            <div class="day-label">Sat</div>
+          </div>
+        </div>
+
+        <!-- Leave Management Section -->
+        <div class="leave-section">
+          <div class="filter-options">
+            <div class="filter-buttons">
+              <button
+                class="filter-btn pending active"
+                onclick="filterApplications('pending')"
+              >
+                Pending
+              </button>
+              <button
+                class="filter-btn approved"
+                onclick="filterApplications('approved')"
+              >
+                Approved
+              </button>
+              <button
+                class="filter-btn declined"
+                onclick="filterApplications('declined')"
+              >
+                Declined
+              </button>
+            </div>
+            <div class="filter-label">Pending Leave Application</div>
+          </div>
+
+          <div class="application-card" data-status="pending">
+            <div class="card-header">
+              <span class="card-title">Application Details</span>
+              <button class="expand-btn" onclick="toggleExpand(this)">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/c2cfd6ec-00c8-4da0-8945-0ee75e2f8b5a"
+                  alt="Expand"
+                />
+              </button>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Ref Number</span>
+              <span class="detail-value">2v7r99T</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Status</span>
+              <span class="status-badge">Pending</span>
+            </div>
+          </div>
+
+          <div class="application-card hidden" data-status="approved">
+            <div class="card-header">
+              <span class="card-title">Application Details</span>
+              <button class="expand-btn" onclick="toggleExpand(this)">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/c2cfd6ec-00c8-4da0-8945-0ee75e2f8b5a"
+                  alt="Expand"
+                />
+              </button>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Ref Number</span>
+              <span class="detail-value">8x3k44L</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Status</span>
+              <span class="status-badge approved">Approved</span>
+            </div>
+          </div>
+
+          <div class="application-card hidden" data-status="declined">
+            <div class="card-header">
+              <span class="card-title">Application Details</span>
+              <button class="expand-btn" onclick="toggleExpand(this)">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/c2cfd6ec-00c8-4da0-8945-0ee75e2f8b5a"
+                  alt="Expand"
+                />
+              </button>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Ref Number</span>
+              <span class="detail-value">5m2n88P</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Status</span>
+              <span class="status-badge declined">Declined</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/0bb1ccf2-f45f-4e45-9c21-fd65d4ecfee7"
+            alt="Home"
+            class="nav-icon"
+          />
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="time-clock.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8ecbad20-d1a4-4bf6-a032-53b932fafc57"
+            alt="Time Clock"
+            class="nav-icon"
+          />
+          <span class="nav-label">Time Clock</span>
+        </a>
+        <a href="leave-management.html" class="nav-item active">
+          <img
+            src="https://www.figma.com/api/mcp/asset/6a20984d-f5c5-445c-9f1f-d8b80a838713"
+            alt="Leave"
+            class="nav-icon"
+          />
+          <span class="nav-label">Leave</span>
+        </a>
+        <a href="index.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/e2b5d70e-e552-4791-8958-0a221cb54631"
+            alt="Notification"
+            class="nav-icon"
+          />
+          <span class="nav-label">Notification</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/722d026f-946b-48a9-998d-4cf31e4f697d"
+            alt="Profile"
+            class="nav-icon"
+          />
+          <span class="nav-label">Profile</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Filter applications by status
+      function filterApplications(status) {
+        // Update button states
+        const buttons = document.querySelectorAll(".filter-btn");
+        buttons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        event.target.classList.add("active");
+
+        // Update label text
+        const label = document.querySelector(".filter-label");
+        const labelText = {
+          pending: "Pending Leave Application",
+          approved: "Approved Leave Application",
+          declined: "Declined Leave Application",
+        };
+        label.textContent = labelText[status];
+
+        // Show/hide application cards
+        const cards = document.querySelectorAll(".application-card");
+        cards.forEach((card) => {
+          if (card.dataset.status === status) {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+        });
+
+        console.log(`Filtering applications: ${status}`);
+      }
+
+      // Toggle expand/collapse application details
+      function toggleExpand(button) {
+        const card = button.closest(".application-card");
+        const isExpanded = card.classList.contains("expanded");
+
+        if (isExpanded) {
+          card.classList.remove("expanded");
+          button.style.transform = "rotate(90deg)";
+          console.log("Collapsed application details");
+        } else {
+          card.classList.add("expanded");
+          button.style.transform = "rotate(270deg)";
+          console.log("Expanded application details");
+        }
+      }
+
+      // Calendar navigation
+      function previousWeek() {
+        console.log("Navigate to previous week");
+      }
+
+      function nextWeek() {
+        console.log("Navigate to next week");
+      }
+
+      // Back button
+      // Removed back button
+    </script>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager Signup | EaseHR</title>
+    <link rel="stylesheet" href="../assets/global.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="manager-signup.css" />
+  </head>
+  <body>
+    <div id="easehr">
+      <div class="card">
+        <div class="logo-section">
+          <img id="logoImg" alt="EaseHR Logo" class="logo-image" />
+        </div>
+        <h1>Create Company Account</h1>
+
+        <form id="registerForm">
+          <!-- Company Information -->
+          <section>
+            <h2>Company Information</h2>
+
+            <div class="input-group">
+              <label>Company name</label>
+              <div class="input-field">
+                <img id="iconCompany" class="input-icon" alt="building" />
+                <input type="text" placeholder="Enter company name" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Company Email</label>
+              <div class="input-field">
+                <img id="iconEmail" class="input-icon" alt="email" />
+                <input type="email" placeholder="Enter your email" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Company Description</label>
+              <div class="input-field">
+                <img id="iconDesc" class="input-icon" alt="description" />
+                <input
+                  type="text"
+                  placeholder="Enter your company description"
+                />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Company Location</label>
+              <div class="input-field">
+                <img id="iconLocation" class="input-icon" alt="location" />
+                <input type="text" placeholder="Enter your company location" />
+              </div>
+            </div>
+          </section>
+
+          <!-- Personal Information -->
+          <section>
+            <h2>Personal Information</h2>
+
+            <div class="input-group">
+              <label>Full name</label>
+              <div class="input-field">
+                <img id="iconUser" class="input-icon" alt="user" />
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Email</label>
+              <div class="input-field">
+                <img id="iconEmail2" class="input-icon" alt="email" />
+                <input type="email" placeholder="Enter your email" required />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Phone Number</label>
+              <div class="input-field">
+                <img id="iconPhone" class="input-icon" alt="phone" />
+                <input type="tel" placeholder="Enter your phone number" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Role/Position</label>
+              <div class="input-field">
+                <img id="iconRole" class="input-icon" alt="role" />
+                <input
+                  type="text"
+                  placeholder="Enter your role or position in the company"
+                />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Password</label>
+              <div class="input-field">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  required
+                />
+                <img id="iconLock" class="input-icon" alt="lock" />
+              </div>
+            </div>
+          </section>
+
+          <button type="submit" class="btn-primary">Register Company</button>
+
+          <p class="terms">
+            By clicking “create account” you agree to
+            <a href="#">Terms</a> & <a href="#">Privacy</a>
+          </p>
+
+          <p class="login">Already have an account? <a href="#">Log In</a></p>
+        </form>
+        <div class="home-indicator" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Message containers for feedback -->
+    <div
+      id="error-message"
+      class="message error"
+      style="
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        z-index: 1000;
+      "
+    ></div>
+    <div
+      id="success-message"
+      class="message success"
+      style="
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        z-index: 1000;
+      "
+    ></div>
+
+    <!-- JS -->
+    <script src="../assets/api.js"></script>
+    <script src="manager-signup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Assignment</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f5f7fa;
+        --text: #0f172a;
+        --muted: #4b5563;
+        --accent: #14b8a6;
+        --success: #22c55e;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .page {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 20px 140px;
+        background-color: var(--bg);
+        position: relative;
+        min-height: 100vh;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 0 20px;
+      }
+
+      .back-btn {
+        width: 24px;
+        height: 24px;
+        transform: rotate(180deg) scaleY(-1);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .header-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        font-weight: 300;
+        color: var(--text);
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      /* Form */
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 8px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .form-label {
+        font-size: 14px;
+        font-weight: 500;
+        font-family: "Graphik Trial", sans-serif;
+        color: var(--text);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px;
+        border: 0.7px solid var(--text);
+        border-radius: 8px;
+        background: #fff;
+        font-size: 12px;
+        font-family: "Inter", sans-serif;
+        color: rgba(15, 23, 42, 0.6);
+        outline: none;
+      }
+
+      .form-input:focus {
+        border-color: var(--accent);
+      }
+
+      .form-textarea {
+        width: 100%;
+        padding: 12px;
+        border: 0.7px solid var(--text);
+        border-radius: 8px;
+        background: #fff;
+        font-size: 12px;
+        font-family: "Graphik Trial", sans-serif;
+        color: var(--text);
+        min-height: 103px;
+        resize: vertical;
+        outline: none;
+      }
+
+      .form-textarea:focus {
+        border-color: var(--accent);
+      }
+
+      /* Date Duration */
+      .date-duration {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .date-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+      }
+
+      .date-label {
+        font-size: 12px;
+        font-family: "Inter", sans-serif;
+        color: var(--text);
+      }
+
+      .date-value {
+        font-size: 12px;
+        font-family: "Inter", sans-serif;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .chevron-down {
+        width: 16px;
+        height: 16px;
+        transform: rotate(90deg) scaleY(-1);
+      }
+
+      .date-separator {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Assign Button */
+      .assign-button-wrapper {
+        position: fixed;
+        left: 50%;
+        bottom: 120px;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px;
+        padding: 0 20px;
+      }
+
+      .assign-btn-primary {
+        width: 100%;
+        background: var(--accent);
+        border: none;
+        padding: 16px 24px;
+        border-radius: 8px;
+        font-size: 16.7px;
+        font-weight: 500;
+        font-family: "Graphik Trial", sans-serif;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .assign-btn-primary:hover {
+        background: #12a594;
+      }
+
+      /* Bottom nav */
+      .bottom-nav {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px;
+        height: 108px;
+        background: #fff;
+        border-top: 1px solid var(--text);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 12px;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-label {
+        font-size: 12px;
+        font-weight: 300;
+        text-align: center;
+      }
+
+      .nav-item.active .nav-label {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-content">
+          <div class="title">Assign New Task</div>
+          <div class="subtitle">Fill in the details below to assign a task</div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="form-container">
+        <!-- Task Title -->
+        <div class="form-group">
+          <label class="form-label">Task Title</label>
+          <input
+            type="text"
+            class="form-input"
+            placeholder="System Migration Audit"
+          />
+        </div>
+
+        <!-- Task Description -->
+        <div class="form-group">
+          <label class="form-label">Task Description</label>
+          <textarea
+            class="form-textarea"
+            placeholder="Perform a full security and performance audit on the Institute's student portal. Ensure all cloud-based laboratory environments are accessible for the upcoming semester and verify that the latest firewall protocols are active. Report any latency issues to the Lead Dev by Friday."
+          >
+Perform a full security and performance audit on the Institute's student portal. Ensure all cloud-based laboratory environments are accessible for the upcoming semester and verify that the latest firewall protocols are active. Report any latency issues to the Lead Dev by Friday.</textarea
+          >
+        </div>
+
+        <!-- Task Duration -->
+        <div class="form-group" style="max-width: 175px">
+          <label class="form-label">Task Duration</label>
+          <div class="date-duration">
+            <div class="date-field">
+              <span class="date-label">Start Date</span>
+              <div class="date-value">
+                <span>8/12/2025</span>
+                <img
+                  class="chevron-down"
+                  src="https://www.figma.com/api/mcp/asset/6fee7da8-b6d2-40f3-bd2d-778da1124033"
+                  alt="Dropdown"
+                />
+              </div>
+            </div>
+            <img
+              class="date-separator"
+              src="https://www.figma.com/api/mcp/asset/741f5e55-ec91-4d33-8eb8-35e35c009fde"
+              alt="-"
+            />
+            <div class="date-field">
+              <span class="date-label">End Date</span>
+              <div class="date-value">
+                <span>10/08/2025</span>
+                <img
+                  class="chevron-down"
+                  src="https://www.figma.com/api/mcp/asset/6fee7da8-b6d2-40f3-bd2d-778da1124033"
+                  alt="Dropdown"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assign Task Button -->
+    <div class="assign-button-wrapper">
+      <button class="assign-btn-primary">Assign Task</button>
+    </div>
+
+    <!-- Bottom navigation -->
+    <nav class="bottom-nav">
+      <a class="nav-item" href="manager-dashboard.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/cae605e6-0223-4049-88f7-e39d0c8e1e98"
+          alt="Home"
+        />
+        <span class="nav-label">Home</span>
+      </a>
+      <a class="nav-item active" href="staff-availability.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/017b71a8-57ef-4b13-965c-ed79e185d356"
+          alt="Task"
+        />
+        <span class="nav-label">Task</span>
+      </a>
+      <a class="nav-item" href="track-leave-status.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/1f554c61-cb93-4117-9637-e8bc8337813f"
+          alt="Leave"
+        />
+        <span class="nav-label">Leave</span>
+      </a>
+      <a class="nav-item" href="index.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/2b749a7d-7f06-441a-ae2c-69ff794e9b10"
+          alt="Notification"
+        />
+        <span class="nav-label">Notification</span>
+      </a>
+      <a class="nav-item" href="profile.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/f5fda12b-e017-4a83-bb86-6ae1f691e106"
+          alt="Profile"
+        />
+        <span class="nav-label">Profile</span>
+      </a>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave Application Form - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        /* background-color: #4a5568; */
+        padding: 20px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-container {
+        max-width: 600px;
+        width: 100%;
+        background: white;
+        border-radius: 30px;
+        overflow: hidden;
+        /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); */
+      }
+
+      .header {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .header-title h1 {
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid red; */
+        width: 100%;
+        font-weight: 600;
+      }
+
+      .content {
+        padding: 0 20px 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 15px;
+        font-size: 20px;
+        color: #4b5563;
+        z-index: 1;
+      }
+
+      input[type="text"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 14px 15px;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        font-size: 20px;
+        outline: none;
+        transition: all 0.3s;
+        font-family: inherit;
+      }
+
+      .input-wrapper input {
+        padding-left: 45px;
+      }
+
+      .input-wrapper textarea {
+        padding-left: 45px;
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #9ca3af;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #14b8a6;
+      }
+
+      select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 12px;
+        cursor: pointer;
+      }
+
+      .upload-btn {
+        width: 100%;
+        padding: 14px 15px;
+        border: 2px dashed #e5e7eb;
+        border-radius: 12px;
+        background: white;
+        cursor: pointer;
+        color: #6b7280;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s;
+      }
+
+      .upload-btn:hover {
+        border-color: #14b8a6;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 16px;
+        background: #14b8a6;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .btn-primary:hover {
+        background: #0f9b8a;
+      }
+
+      .home-indicator {
+        height: 5px;
+        width: 134px;
+        background: #1f2937;
+        border-radius: 100px;
+        margin: 10px auto;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .mobile-container {
+          border-radius: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mobile-container">
+      <div class="header">
+        <div class="header-title">
+          <h1>Leave Application Form</h1>
+        </div>
+      </div>
+
+      <div class="content">
+        <form>
+          <div class="form-group">
+            <label class="form-label">Leave Type</label>
+            <select>
+              <option>Select leave type</option>
+              <option>Annual Leave</option>
+              <option>Sick Leave</option>
+              <option>Personal Leave</option>
+              <option>Emergency Leave</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Start Date</label>
+            <div class="input-wrapper">
+              <span class="input-icon"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 1H8V2H6V1ZM16 1H18V2H16V1ZM22 5V4H19V2H18V7H16V2H15V4H9V2H8V7H6V2H5V4H2V5H1V22H2V23H22V22H23V5H22ZM21 8V11H18V8H21ZM21 16H18V13H21V16ZM21 21H18V18H21V21ZM3 18H6V21H3V18ZM3 13H6V16H3V13ZM16 16H13V13H16V16ZM11 16H8V13H11V16ZM8 18H11V21H8V18ZM13 18H16V21H13V18ZM16 11H13V8H16V11ZM11 8V11H8V8H11ZM6 11H3V8H6V11Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+              <input type="text" placeholder="MM/DD/YY" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">End Date</label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 1H8V2H6V1ZM16 1H18V2H16V1ZM22 5V4H19V2H18V7H16V2H15V4H9V2H8V7H6V2H5V4H2V5H1V22H2V23H22V22H23V5H22ZM21 8V11H18V8H21ZM21 16H18V13H21V16ZM21 21H18V18H21V21ZM3 18H6V21H3V18ZM3 13H6V16H3V13ZM16 16H13V13H16V16ZM11 16H8V13H11V16ZM8 18H11V21H8V18ZM13 18H16V21H13V18ZM16 11H13V8H16V11ZM11 8V11H8V8H11ZM6 11H3V8H6V11Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+              <input type="text" placeholder="MM/DD/YY" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">State Your Reason</label>
+            <div class="input-wrapper">
+              <span class="input-icon" style="top: 15px">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+              <textarea
+                placeholder="Describe the reason for your request"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Upload Document</label>
+            <button type="button" class="upload-btn">
+              <span
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 12V3.85L4.4 6.45L3 5L8 0L13 5L11.6 6.45L9 3.85V12H7ZM2 16C1.45 16 0.979333 15.8043 0.588 15.413C0.196666 15.0217 0.000666667 14.5507 0 14V11H2V14H14V11H16V14C16 14.55 15.8043 15.021 15.413 15.413C15.0217 15.805 14.5507 16.0007 14 16H2Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+              <span>Upload Supporting document(optional)</span>
+            </button>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <span> </span>
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- <div class="home-indicator"></div> -->
+    </div>
+  </body>
+</html>

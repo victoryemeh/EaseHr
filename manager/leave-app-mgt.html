@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leave Management - ANTI50CIAL Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        /* tried matching the font in the image as much as possible. You get? If you know the font, you can replace this. */
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 text-gray-800 flex justify-center min-h-screen">
+    <div
+      class="w-full max-w-md bg-gray-50 relative pb-24 shadow-2xl overflow-hidden"
+    >
+      <header class="pt-12 px-6 pb-4">
+        <div class="flex items-start gap-4">
+          <div>
+            <h1 class="text-xl font-bold text-gray-900">Leave Management</h1>
+            <p class="text-gray-500 text-sm mt-0.5">Manage your Leave Easily</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="px-6 mt-4">
+        <div class="flex justify-between items-center mb-4">
+          <div class="flex items-center gap-1 font-bold text-gray-800">
+            <span>December 2025</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke="currentColor"
+              class="w-4 h-4 text-teal-500"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </div>
+          <div class="flex gap-4">
+            <button class="text-teal-500 font-bold">&lt;</button>
+            <button class="text-teal-500 font-bold">&gt;</button>
+          </div>
+        </div>
+
+        <div class="flex justify-between text-center text-sm text-gray-500">
+          <div class="flex flex-col gap-1"><span>Sun</span></div>
+          <div class="flex flex-col gap-1"><span>Mon</span></div>
+          <div class="flex flex-col gap-1"><span>Tue</span></div>
+          <div class="flex flex-col gap-1"><span>Wed</span></div>
+          <div class="flex flex-col gap-1"><span>Thur</span></div>
+          <div class="flex flex-col gap-1">
+            <span
+              class="bg-teal-500 text-white px-2.5 py-1 rounded-lg shadow-md font-medium"
+              >Fri</span
+            >
+          </div>
+          <div class="flex flex-col gap-1"><span>Sat</span></div>
+        </div>
+      </section>
+
+      <section class="px-6 mt-8 flex gap-3 overflow-x-auto no-scrollbar">
+        <button
+          class="bg-orange-400 text-white px-6 py-2 rounded-full text-sm font-medium shadow-sm hover:bg-orange-500 transition"
+        >
+          Pending
+        </button>
+        <button
+          class="border border-green-500 text-gray-700 px-6 py-2 rounded-full text-sm font-medium hover:bg-green-50 transition"
+        >
+          Approved
+        </button>
+        <button
+          class="border border-red-500 text-gray-700 px-6 py-2 rounded-full text-sm font-medium hover:bg-red-50 transition"
+        >
+          Declined
+        </button>
+      </section>
+
+      <div class="px-6 mt-6 mb-2">
+        <h3 class="text-gray-700 text-sm font-medium">
+          Total Pending Employee Leave
+        </h3>
+      </div>
+
+      <section class="px-6 flex flex-col gap-4">
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <img
+                src="https://i.pravatar.cc/150?u=princess"
+                alt="Princess"
+                class="w-12 h-12 rounded-full object-cover border border-gray-100"
+              />
+              <div>
+                <h4 class="text-sm font-bold text-gray-900">
+                  Name : Princess Favour
+                </h4>
+                <p class="text-xs text-gray-500 mt-1">
+                  Position: Product Designer
+                </p>
+              </div>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex justify-end mt-3">
+            <button
+              class="bg-teal-500 hover:bg-teal-600 text-white text-xs font-medium px-6 py-2 rounded-lg transition shadow-md shadow-teal-500/20"
+            >
+              View Request
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <img
+                src="https://i.pravatar.cc"
+                alt="img"
+                class="w-12 h-12 rounded-full object-cover border border-gray-100"
+              />
+              <div>
+                <h4 class="text-sm font-bold text-gray-900">
+                  Name : Okhonmina Abba
+                </h4>
+                <p class="text-xs text-gray-500 mt-1">
+                  Position : Cybersecurity
+                </p>
+              </div>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex justify-end mt-3">
+            <button
+              class="bg-teal-500 hover:bg-teal-600 text-white text-xs font-medium px-6 py-2 rounded-lg transition shadow-md shadow-teal-500/20"
+            >
+              View Request
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+          <div class="flex items-start justify-between">
+            <div class="flex gap-3">
+              <img
+                src="https://i.pravatar.cc"
+                alt="Blessing"
+                class="w-12 h-12 rounded-full object-cover border border-gray-100"
+              />
+              <div>
+                <h4 class="text-sm font-bold text-gray-900">
+                  Name : Blessing Valentine
+                </h4>
+                <p class="text-xs text-gray-500 mt-1">
+                  Position : Technical Writer
+                </p>
+              </div>
+            </div>
+            <button class="text-gray-400 hover:text-gray-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-5 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex justify-end mt-3">
+            <button
+              class="bg-teal-500 hover:bg-teal-600 text-white text-xs font-medium px-6 py-2 rounded-lg transition shadow-md shadow-teal-500/20"
+            >
+              View Request
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

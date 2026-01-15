@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Login - EaseHR</title>
+    <link rel="stylesheet" href="employee-login.css" />
+    <style>
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #0f172a;
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: white;
+      }
+
+      .input-wrapper input {
+        flex: 1;
+        border: none;
+        padding: 12px 16px;
+        font-size: 14px;
+        outline: none;
+      }
+
+      .eye-icon {
+        padding-right: 12px;
+        cursor: pointer;
+        color: #64748b;
+      }
+
+      .remember-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+
+      .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .checkbox-wrapper input {
+        cursor: pointer;
+      }
+
+      .forgot-link {
+        color: #14b8a6;
+        text-decoration: none;
+      }
+
+      .forgot-link:hover {
+        text-decoration: underline;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 12px;
+        background: #14b8a6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .btn-primary:hover {
+        background: #0d9488;
+      }
+
+      .link-text {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      .link-text a {
+        color: #14b8a6;
+        text-decoration: none;
+      }
+
+      .link-text a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mobile-container">
+      <div class="logo-section">
+        <img
+          src="../assets/Big EaseHr logo.png"
+          alt="EaseHR Logo"
+          class="logo-image"
+        />
+      </div>
+
+      <div class="content">
+        <h1 class="welcome-title">Welcome Back!</h1>
+        <p class="welcome-subtitle">Login to manage your workday</p>
+
+        <!-- Error and Success Messages -->
+        <div
+          id="error-message"
+          style="
+            display: none;
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+          "
+        ></div>
+        <div
+          id="success-message"
+          style="
+            display: none;
+            background: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+          "
+        ></div>
+
+        <form id="employeeLoginForm">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <div class="input-wrapper">
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+              />
+              <span class="eye-icon" onclick="togglePassword()">👁️</span>
+            </div>
+          </div>
+
+          <div class="remember-row">
+            <div class="checkbox-wrapper">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
+            </div>
+            <a href="#" class="forgot-link">Forgotten Password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Log In</button>
+
+          <p class="link-text">
+            Don't have an account? <a href="employee-signup.html">Register</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/api.js"></script>
+    <script>
+      function togglePassword() {
+        const field = document.getElementById("password");
+        if (field.type === "password") {
+          field.type = "text";
+        } else {
+          field.type = "password";
+        }
+      }
+
+      // Handle employee login form submission
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("employeeLoginForm");
+        if (form) {
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Validate inputs
+            if (!email || !password) {
+              showError("Please fill in all fields");
+              return;
+            }
+
+            if (!Validator.email(email)) {
+              showError("Please enter a valid email address");
+              return;
+            }
+
+            try {
+              const response = await AuthAPI.login(email, password);
+
+              TokenManager.setToken(response.token);
+              TokenManager.setRole("employee");
+              TokenManager.setUserId(response.id);
+
+              showSuccess("Login successful! Redirecting...");
+              setTimeout(() => {
+                window.location.href = "../Employee/dashboard.html";
+              }, 1500);
+            } catch (error) {
+              showError(error.message);
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

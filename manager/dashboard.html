@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager Home Dashboard</title>
+    <link rel="stylesheet" href="../assets/global.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", sans-serif;
+        background-color: #f5f7fa;
+        color: #0f172a;
+      }
+
+      .container {
+        width: 600px;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #f5f7fa;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      /* Status Bar */
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 24px;
+        background-color: #f5f7fa;
+        font-family: "SF Pro", sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        color: #000;
+      }
+
+      .status-bar-left {
+        flex: 1;
+      }
+
+      .status-bar-right {
+        display: flex;
+        gap: 7px;
+        align-items: center;
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      .status-icon {
+        width: auto;
+        height: 12px;
+      }
+
+      /* Header Section */
+      .header-section {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 24px;
+        background-color: #f5f7fa;
+      }
+
+      .profile-image {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .header-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .header-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: #0f172a;
+        line-height: 1.2;
+      }
+
+      .header-subtitle {
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        color: #0f172a;
+        line-height: 1.2;
+      }
+
+      /* Main Content */
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0 24px 24px 24px;
+        overflow-y: auto;
+        max-height: calc(100vh - 200px);
+      }
+
+      /* Card Styles */
+      .card {
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+      }
+
+      .card.large-shadow {
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Attendance Section */
+      .attendance-section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+
+      .card-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 16.7px;
+        font-weight: 600;
+        color: #0f172a;
+      }
+
+      .card-subtitle {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #0f172a;
+      }
+
+      /* Staff Item */
+      .staff-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .staff-item:last-child {
+        border-bottom: none;
+      }
+
+      .staff-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .staff-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #22c55e;
+        flex-shrink: 0;
+      }
+
+      .staff-name {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #0f172a;
+      }
+
+      .staff-time {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 12px;
+        color: #000;
+      }
+
+      .time-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* View All Link */
+      .view-all {
+        text-align: right;
+        margin-top: 8px;
+      }
+
+      .view-all-link {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: #14b8a6;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /* Staff Overview */
+      .overview-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+      }
+
+      .overview-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #0f172a;
+      }
+
+      .overview-value {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .overview-count {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        color: #000;
+        min-width: 16px;
+      }
+
+      .overview-icon {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+      }
+
+      /* Quick Actions */
+      .quick-actions-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 16.7px;
+        font-weight: 600;
+        color: #0f172a;
+        margin-bottom: 16px;
+      }
+
+      .actions-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .action-card {
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .action-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
+      }
+
+      .action-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .action-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #0f172a;
+      }
+
+      .action-description {
+        font-family: "Graphik Trial", sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+        color: #0f172a;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        max-width: 100%;
+        height: 108px;
+        background-color: white;
+        border-top: 1px solid #0f172a;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 12px;
+        box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 300;
+        font-size: 12px;
+        color: #0f172a;
+        text-align: center;
+      }
+
+      .nav-item.active .nav-label {
+        color: #14b8a6;
+      }
+
+      body {
+        padding-bottom: 120px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Status Bar -->
+      <!-- <div class="status-bar">
+        <div class="status-bar-left">9:41</div>
+        <div class="status-bar-right">
+          <img
+            src="https://www.figma.com/api/mcp/asset/79507fba-6bc5-4199-a425-6eb1426bc4ad"
+            alt="Cellular"
+            class="status-icon"
+          />
+          <img
+            src="https://www.figma.com/api/mcp/asset/dde49460-6a90-46af-a60c-2026269abc07"
+            alt="WiFi"
+            class="status-icon"
+          />
+          <img
+            src="https://www.figma.com/api/mcp/asset/427480c5-9d3e-4309-b20b-09768c943463"
+            alt="Battery"
+            class="status-icon"
+          />
+        </div>
+      </div> -->
+
+      <!-- Header Section -->
+      <div class="header-section">
+        <img
+          src="https://www.figma.com/api/mcp/asset/b2e34ee2-ce9e-462a-9c9c-427da7362724"
+          alt="Profile"
+          class="profile-image"
+        />
+        <div class="header-text">
+          <span class="header-title">Welcome, Manager</span>
+          <span class="header-subtitle">Ready for the day?</span>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Attendance Card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Attendance</span>
+            <span class="card-subtitle">Total Clock in - 42</span>
+          </div>
+
+          <div class="staff-item">
+            <div class="staff-left">
+              <div class="staff-indicator"></div>
+              <span class="staff-name">Okhonmina Abba</span>
+            </div>
+            <div class="staff-time">
+              <img
+                src="https://www.figma.com/api/mcp/asset/64bbc533-9f97-49a0-bae0-e503d6071abc"
+                alt="Time"
+                class="time-icon"
+              />
+              <span>12:45 pm</span>
+            </div>
+          </div>
+
+          <div class="staff-item">
+            <div class="staff-left">
+              <div class="staff-indicator"></div>
+              <span class="staff-name">Princess Favour</span>
+            </div>
+            <div class="staff-time">
+              <img
+                src="https://www.figma.com/api/mcp/asset/64bbc533-9f97-49a0-bae0-e503d6071abc"
+                alt="Time"
+                class="time-icon"
+              />
+              <span>12:45 pm</span>
+            </div>
+          </div>
+
+          <div class="staff-item">
+            <div class="staff-left">
+              <div class="staff-indicator"></div>
+              <span class="staff-name">Blessing Valentine</span>
+            </div>
+            <div class="staff-time">
+              <img
+                src="https://www.figma.com/api/mcp/asset/64bbc533-9f97-49a0-bae0-e503d6071abc"
+                alt="Time"
+                class="time-icon"
+              />
+              <span>12:45 pm</span>
+            </div>
+          </div>
+
+          <div class="view-all">
+            <a href="#" class="view-all-link">View All</a>
+          </div>
+        </div>
+
+        <!-- Staff Overview Card -->
+        <div class="card large-shadow">
+          <div class="card-header">
+            <span class="card-title">Staff Overview</span>
+          </div>
+
+          <div class="overview-item">
+            <span class="overview-label">Total Staff :</span>
+            <div class="overview-value">
+              <span class="overview-count">12</span>
+            </div>
+          </div>
+
+          <div class="overview-item">
+            <span class="overview-label">Available Staff :</span>
+            <div class="overview-value">
+              <span class="overview-count">6</span>
+              <div
+                class="overview-icon"
+                style="background-color: #22c55e"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #22c55e"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #22c55e"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #22c55e"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #22c55e"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #22c55e"
+              ></div>
+            </div>
+          </div>
+
+          <div class="overview-item">
+            <span class="overview-label">Busy Staff :</span>
+            <div class="overview-value">
+              <span class="overview-count">4</span>
+              <div
+                class="overview-icon"
+                style="background-color: #f59e0b"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #f59e0b"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #f59e0b"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #f59e0b"
+              ></div>
+            </div>
+          </div>
+
+          <div class="overview-item">
+            <span class="overview-label">Staff on Leave :</span>
+            <div class="overview-value">
+              <span class="overview-count">2</span>
+              <div
+                class="overview-icon"
+                style="background-color: #ef4444"
+              ></div>
+              <div
+                class="overview-icon"
+                style="background-color: #ef4444"
+              ></div>
+            </div>
+          </div>
+
+          <div class="view-all">
+            <a href="#" class="view-all-link">View All</a>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div>
+          <h3 class="quick-actions-title">Quick Actions</h3>
+          <div class="actions-grid">
+            <a href="leave-management.html" class="action-card">
+              <img
+                src="https://www.figma.com/api/mcp/asset/15ff412b-07c2-4e18-8752-da1d2ab53824"
+                alt="Leave"
+                class="action-icon"
+              />
+              <span class="action-title">Leave Request</span>
+              <span class="action-description">Approve leave</span>
+            </a>
+
+            <a href="#" class="action-card">
+              <img
+                src="https://www.figma.com/api/mcp/asset/427480c5-9d3e-4309-b20b-09768c943463"
+                alt="Tasks"
+                class="action-icon"
+              />
+              <span class="action-title">Assign Tasks</span>
+              <span class="action-description">Assign task to staff.</span>
+            </a>
+
+            <div class="action-card">
+              <img
+                src="https://www.figma.com/api/mcp/asset/427480c5-9d3e-4309-b20b-09768c943463"
+                alt="Attendance"
+                class="action-icon"
+              />
+              <span class="action-title">Attendance</span>
+              <span class="action-description">View Clock in Attendance</span>
+            </div>
+
+            <a href="#" class="action-card">
+              <img
+                src="https://www.figma.com/api/mcp/asset/b009d22f-75f6-4d0a-aae3-a88d54c54f68"
+                alt="Oversight"
+                class="action-icon"
+              />
+              <span class="action-title">Oversight</span>
+              <span class="action-description">View Staff Availability</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <a href="/manager/dashboard.html" class="nav-item active">
+          <img
+            src="https://www.figma.com/api/mcp/asset/0bb1ccf2-f45f-4e45-9c21-fd65d4ecfee7"
+            alt="Home"
+            class="nav-icon"
+          />
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="/manager/attendance.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8ecbad20-d1a4-4bf6-a032-53b932fafc57"
+            alt="Task"
+            class="nav-icon"
+          />
+          <span class="nav-label">Task</span>
+        </a>
+        <a href="/manager/leave-app-mgt.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/6a20984d-f5c5-445c-9f1f-d8b80a838713"
+            alt="Leave"
+            class="nav-icon"
+          />
+          <span class="nav-label">Leave</span>
+        </a>
+        <a href="/manager/notifications.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/e2b5d70e-e552-4791-8958-0a221cb54631"
+            alt="Notification"
+            class="nav-icon"
+          />
+          <span class="nav-label">Notification</span>
+        </a>
+        <a href="/manager/profile.html" class="nav-item">
+          <img
+            src="https://www.figma.com/api/mcp/asset/722d026f-946b-48a9-998d-4cf31e4f697d"
+            alt="Profile"
+            class="nav-icon"
+          />
+          <span class="nav-label">Profile</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Placeholder for future functionality
+      console.log("Manager Dashboard Loaded");
+    </script>
+  </body>
+</html>

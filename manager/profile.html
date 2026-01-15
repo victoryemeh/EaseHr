@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Profile - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f5f7fa;
+        --text: #0f172a;
+        --accent: #14b8a6;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --card-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        --warning: #f59e0b;
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 16px;
+        color: var(--text);
+      }
+
+      .container {
+        position: relative;
+        width: 402px;
+        background: var(--bg);
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Status Bar */
+      .status-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 19px 24px 14px;
+        font-family: "SF Pro", sans-serif;
+        background: var(--bg);
+      }
+
+      .status-time {
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+      }
+
+      .status-levels {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .status-levels img {
+        display: block;
+      }
+
+      .icon-cellular {
+        width: 19.2px;
+        height: 12.226px;
+      }
+
+      .icon-wifi {
+        width: 17.142px;
+        height: 12.328px;
+      }
+
+      .icon-battery {
+        width: 27.328px;
+        height: 13px;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px 18px;
+        background: var(--bg);
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .back-btn {
+        width: 24px;
+        height: 24px;
+        transform: rotate(180deg) scaleY(-1);
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      .back-btn img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .header-title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .edit-password-link {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(15, 23, 42, 0.6);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 0 24px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* Profile Card */
+      .profile-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 16px 12px;
+        box-shadow: var(--card-shadow);
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .profile-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .profile-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .profile-email {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text);
+      }
+
+      .profile-badge {
+        display: inline-flex;
+        background: var(--success);
+        color: #000;
+        padding: 8px 16px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        width: fit-content;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Organization Details Section */
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .section-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .section-edit {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(15, 23, 42, 0.6);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /* Detail Cards */
+      .detail-card {
+        background: #ffffff;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        gap: 4px;
+        box-shadow: var(--card-shadow);
+      }
+
+      .detail-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .detail-icon img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .detail-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .detail-label {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text);
+      }
+
+      .detail-value {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      /* Information Card */
+      .info-card {
+        background: #ffffff;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: var(--card-shadow);
+        margin-bottom: 16px;
+      }
+
+      .info-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+
+      .info-description {
+        font-size: 12px;
+        font-weight: 400;
+        color: #5e5e5e;
+        line-height: 18px;
+      }
+
+      .info-description .highlight {
+        color: #0d06d7;
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        height: 108px;
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        background: #ffffff;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 300;
+        cursor: pointer;
+      }
+
+      .nav-item img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-item.active {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-levels">
+          <img
+            class="icon-cellular"
+            src="https://www.figma.com/api/mcp/asset/ba724f9f-b73c-4624-b713-0c6b62c33ec3"
+            alt="Cellular"
+          />
+          <img
+            class="icon-wifi"
+            src="https://www.figma.com/api/mcp/asset/5a9e1a78-69f1-40d3-9bb9-274a6e3ea365"
+            alt="WiFi"
+          />
+          <img
+            class="icon-battery"
+            src="https://www.figma.com/api/mcp/asset/394fc607-af42-4d1f-b674-cfc09612a034"
+            alt="Battery"
+          />
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <a href="index.html">
+            <button class="back-btn">
+              <img
+                src="https://www.figma.com/api/mcp/asset/9a73e757-4b3e-45b0-a2eb-b60275ee01df"
+                alt="Back"
+              />
+            </button>
+          </a>
+          <div class="header-title">Admin Profile</div>
+        </div>
+        <div class="edit-password-link">Edit Password</div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Profile Card -->
+        <div class="profile-card">
+          <div class="profile-avatar">
+            <img
+              src="https://www.figma.com/api/mcp/asset/c75dcaf3-bac8-4db6-ac4d-3a0fa173750d"
+              alt="Admin Avatar"
+            />
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">Duru Peters Amanda</div>
+            <div class="profile-email">durupeters@gmail.com</div>
+            <div class="profile-badge">Organization Admin</div>
+          </div>
+        </div>
+
+        <!-- Organization Details Section -->
+        <div class="section-header">
+          <div class="section-title">Organization Details</div>
+          <div class="section-edit">Edit</div>
+        </div>
+
+        <!-- Detail Cards -->
+        <div class="detail-card">
+          <div class="detail-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/e5f37659-ae8f-4763-b17d-92a8ef366562"
+              alt="Organization Icon"
+            />
+          </div>
+          <div class="detail-content">
+            <div class="detail-label">Organization name</div>
+            <div class="detail-value">Techcrush Inc.</div>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/f3dabc9a-385b-4bf7-8f81-4dad3b7af979"
+              alt="Email Icon"
+            />
+          </div>
+          <div class="detail-content">
+            <div class="detail-label">Company Email</div>
+            <div class="detail-value">techcrush@tca.com</div>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/fc591499-7af8-4b21-8309-6f25619de0c1"
+              alt="Size Icon"
+            />
+          </div>
+          <div class="detail-content">
+            <div class="detail-label">Company Size</div>
+            <div class="detail-value">10-20 Employees</div>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/47a0c0b4-7f68-4a33-a673-bd3bbaabd108"
+              alt="Industry Icon"
+            />
+          </div>
+          <div class="detail-content">
+            <div class="detail-label">Industry</div>
+            <div class="detail-value">Software Development</div>
+          </div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/c254f30b-41ef-49d5-8b94-ee4c53571b51"
+              alt="Location Icon"
+            />
+          </div>
+          <div class="detail-content">
+            <div class="detail-label">Company Location</div>
+            <div class="detail-value">Lagos, Nigeria</div>
+          </div>
+        </div>
+
+        <!-- Employee Onboarding Card -->
+        <div class="info-card">
+          <div class="info-title">Employee Onboarding</div>
+          <div class="info-description">
+            Invite employees to securely join your organization using an
+            email-based <span class="highlight">access code.</span>
+          </div>
+        </div>
+
+        <!-- Log Out Button -->
+        <button
+          style="
+            background: transparent;
+            border: none;
+            color: #c50303;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 16px;
+            font-family: 'Graphik Trial', sans-serif;
+          "
+        >
+          Log Out
+        </button>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <a class="nav-item" href="index.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8bff8bfc-487b-4cad-96fb-9f31027d2770"
+            alt="Home"
+          />
+          <span>Home</span>
+        </a>
+        <a class="nav-item" href="staff-availability.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/222b01af-a106-4ecb-9126-709be0ee3586"
+            alt="Task"
+          />
+          <span>Task</span>
+        </a>
+        <a class="nav-item" href="leave-management.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/77957ebb-3f84-4800-92aa-c8cabac34535"
+            alt="Leave"
+          />
+          <span>Leave</span>
+        </a>
+        <a class="nav-item" href="index.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/6af7dc57-7ca4-4daf-9dda-01d43d543441"
+            alt="Notification"
+          />
+          <span>Notification</span>
+        </a>
+        <div class="nav-item active">
+          <img
+            src="https://www.figma.com/api/mcp/asset/e13365ad-0812-4394-8bab-2b22cdd2f655"
+            alt="Profile"
+          />
+          <span>Profile</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

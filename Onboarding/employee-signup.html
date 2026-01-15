@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Sign Up - EaseHR</title>
+    <link rel="stylesheet" href="../assets/global.css" />
+    <link rel="stylesheet" href="employee-signup.css" />
+  </head>
+  <body>
+    <div class="mobile-container">
+      <div class="logo-section">
+        <img
+          src="../assets/Big EaseHr logo.png"
+          alt="EaseHR Logo"
+          class="logo-image"
+        />
+      </div>
+      <div class="content">
+        <h1 class="page-title">Create Account</h1>
+
+        <!-- Error and Success Messages -->
+        <div
+          id="error-message"
+          class="message error"
+          style="display: none"
+        ></div>
+        <div
+          id="success-message"
+          class="message success"
+          style="display: none"
+        ></div>
+
+        <form id="employeeSignupForm">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <div class="input-wrapper">
+              <span class="input-icon"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.2286 19.654C22.4604 18.1731 23.3172 16.4176 23.7264 14.5359C24.1356 12.6542 24.0852 10.7017 23.5794 8.84357C23.0737 6.98546 22.1275 5.27638 20.8209 3.86093C19.5142 2.44548 17.8856 1.36528 16.0729 0.711726C14.2601 0.0581688 12.3164 -0.149523 10.4063 0.106219C8.49614 0.361961 6.67576 1.07361 5.09911 2.18098C3.52247 3.28834 2.23595 4.75883 1.34839 6.46806C0.460818 8.17729 -0.00168342 10.075 4.60413e-06 12.0006C0.000725678 14.7998 0.987985 17.5094 2.78857 19.654L2.77141 19.6685C2.83146 19.7405 2.90008 19.8022 2.96183 19.8734C3.03903 19.9617 3.12223 20.0448 3.20201 20.1305C3.44103 20.3916 3.68978 20.6401 3.94825 20.8761C4.02831 20.947 4.10837 21.0161 4.18842 21.0835C4.46291 21.3206 4.74597 21.544 5.0376 21.7537C5.07534 21.7794 5.10965 21.8129 5.1474 21.8394V21.8292C7.1563 23.2418 9.55289 24 12.0094 24C14.466 24 16.8626 23.2418 18.8715 21.8292V21.8394C18.9092 21.8129 18.9427 21.7794 18.9813 21.7537C19.2729 21.5435 19.556 21.3201 19.8305 21.0835C19.9105 21.0155 19.9906 20.9464 20.0706 20.8761C20.3285 20.6401 20.5773 20.3916 20.8169 20.1305C20.8966 20.0448 20.979 19.9617 21.057 19.8734C21.1179 19.8022 21.1874 19.7405 21.2475 19.6677L21.2286 19.654ZM12.0086 5.1442C12.772 5.1442 13.5183 5.37039 14.153 5.79417C14.7878 6.21795 15.2825 6.82029 15.5747 7.52501C15.8668 8.22973 15.9432 9.00518 15.7943 9.75331C15.6454 10.5014 15.2778 11.1886 14.7379 11.728C14.1981 12.2674 13.5104 12.6347 12.7616 12.7835C12.0129 12.9323 11.2368 12.8559 10.5315 12.564C9.82616 12.2721 9.22332 11.7778 8.79919 11.1436C8.37506 10.5093 8.14868 9.76369 8.14868 9.00091C8.14868 7.97804 8.55535 6.99708 9.27922 6.27381C10.0031 5.55053 10.9849 5.1442 12.0086 5.1442ZM5.15254 19.654C5.16742 18.5286 5.62512 17.4544 6.42662 16.6637C7.22811 15.873 8.30896 15.4293 9.43532 15.4287H14.5818C15.7082 15.4293 16.7891 15.873 17.5905 16.6637C18.392 17.4544 18.8497 18.5286 18.8646 19.654C16.9834 21.3478 14.5409 22.2852 12.0086 22.2852C9.47627 22.2852 7.03374 21.3478 5.15254 19.654Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 20C3.45 20 2.97933 19.8043 2.588 19.413C2.19667 19.0217 2.00067 18.5507 2 18V6C2 5.45 2.196 4.97933 2.588 4.588C2.98 4.19667 3.45067 4.00067 4 4H20C20.55 4 21.021 4.196 21.413 4.588C21.805 4.98 22.0007 5.45067 22 6V18C22 18.55 21.8043 19.021 21.413 19.413C21.0217 19.805 20.5507 20.0007 20 20H4ZM12 13L20 8V6L12 11L4 6V8L12 13Z"
+                    fill="black"
+                  />
+                </svg>
+              </span>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <div class="input-wrapper">
+              <span class="input-icon"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.62 10.79C8.06 13.62 10.38 15.93 13.21 17.38L15.41 15.18C15.68 14.91 16.08 14.82 16.43 14.94C17.55 15.31 18.76 15.51 20 15.51C20.55 15.51 21 15.96 21 16.51V20C21 20.55 20.55 21 20 21C10.61 21 3 13.39 3 4C3 3.45 3.45 3 4 3H7.5C8.05 3 8.5 3.45 8.5 4C8.5 5.25 8.7 6.45 9.07 7.57C9.18 7.92 9.1 8.31 8.82 8.59L6.62 10.79Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+                style="padding-left: 15px"
+              />
+              <span class="eye-icon" onclick="togglePassword('password')"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+                style="padding-left: 15px"
+              />
+              <span class="eye-icon" onclick="togglePassword('confirmPassword')"
+                ><svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z"
+                    fill="#0F172A"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">Create Account</button>
+
+          <p class="terms-text">
+            By clicking "create account" you agree to <a href="#">Terms</a> &
+            <a href="#">Privacy</a>
+          </p>
+
+          <p class="link-text">
+            Already have an account? <a href="employee-login.html">Log In</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- <div class="home-indicator"></div> -->
+    </div>
+
+    <script src="../assets/api.js"></script>
+    <script>
+      function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        if (field.type === "password") {
+          field.type = "text";
+        } else {
+          field.type = "password";
+        }
+      }
+
+      // Handle employee signup form submission
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("employeeSignupForm");
+        if (form) {
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword =
+              document.getElementById("confirmPassword").value;
+
+            // Validate inputs
+            if (!fullName || !email || !password || !confirmPassword) {
+              showError("Please fill in all required fields");
+              return;
+            }
+
+            if (!Validator.email(email)) {
+              showError("Please enter a valid email address");
+              return;
+            }
+
+            if (!Validator.password(password)) {
+              showError("Password must be at least 6 characters long");
+              return;
+            }
+
+            if (!Validator.matchPasswords(password, confirmPassword)) {
+              showError("Passwords do not match");
+              return;
+            }
+
+            try {
+              const response = await AuthAPI.register(
+                fullName,
+                email,
+                password,
+                "employee"
+              );
+
+              TokenManager.setToken(response.token);
+              TokenManager.setRole("employee");
+              TokenManager.setUserId(response.id);
+
+              showSuccess("Account created successfully! Redirecting...");
+              setTimeout(() => {
+                window.location.href = "verify-account.html";
+              }, 1500);
+            } catch (error) {
+              showError(error.message);
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

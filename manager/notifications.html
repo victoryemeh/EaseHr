@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f5f7fa;
+        --text: #0f172a;
+        --accent: #14b8a6;
+        --success: #22c55e;
+        --danger: #ef4444;
+        --card-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 16px;
+        color: var(--text);
+      }
+
+      .container {
+        position: relative;
+        width: 402px;
+        height: 874px;
+        background: var(--bg);
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Status Bar */
+      .status-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 19px 24px 14px;
+        font-family: "SF Pro", sans-serif;
+        background: var(--bg);
+      }
+
+      .status-time {
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+      }
+
+      .status-levels {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .status-levels img {
+        display: block;
+      }
+
+      .icon-cellular {
+        width: 19.2px;
+        height: 12.226px;
+      }
+
+      .icon-wifi {
+        width: 17.142px;
+        height: 12.328px;
+      }
+
+      .icon-battery {
+        width: 27.328px;
+        height: 13px;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 0 24px 18px;
+        background: var(--bg);
+      }
+
+      .back-btn {
+        width: 24px;
+        height: 24px;
+        transform: rotate(180deg) scaleY(-1);
+        cursor: pointer;
+      }
+
+      .header-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .header-title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .header-subtitle {
+        font-size: 16px;
+        font-weight: 300;
+      }
+
+      /* Calendar */
+      .calendar {
+        padding: 8px 4px;
+        background: var(--bg);
+        border-radius: 8px;
+      }
+
+      .calendar-months {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .month-nav {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .nav-btn {
+        background: none;
+        border: none;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .nav-btn img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .month-name {
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .date-nav {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .day-labels {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .day-label {
+        width: 40px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 400;
+        cursor: pointer;
+      }
+
+      .day-label.active {
+        background: var(--accent);
+      }
+
+      /* Filter Tabs */
+      .filter-section {
+        padding: 8px 24px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        height: 32px;
+        padding: 8px 16px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        border: 1px solid;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .filter-btn.active {
+        background: var(--success);
+        border-color: var(--success);
+        color: var(--text);
+      }
+
+      .filter-btn:not(.active) {
+        border-color: #1f3a5f;
+        color: var(--text);
+      }
+
+      .filter-label {
+        font-size: 12px;
+        font-weight: 400;
+        padding: 0 24px;
+        margin: 8px 0;
+      }
+
+      /* Content */
+      .content {
+        flex: 1;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow-y: auto;
+      }
+
+      /* Notification Card */
+      .notification-card {
+        background: #ffffff;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        gap: 4px;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+      }
+
+      .notification-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .notification-icon img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .notification-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 286px;
+      }
+
+      .notification-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      .notification-desc {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text);
+      }
+
+      .notification-expand {
+        width: 16px;
+        height: 16px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transform: rotate(90deg);
+      }
+
+      .notification-expand img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        height: 108px;
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        background: #ffffff;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 300;
+        cursor: pointer;
+      }
+
+      .nav-item img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-item.active {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-levels">
+          <img
+            class="icon-cellular"
+            src="https://www.figma.com/api/mcp/asset/ba724f9f-b73c-4624-b713-0c6b62c33ec3"
+            alt="Cellular"
+          />
+          <img
+            class="icon-wifi"
+            src="https://www.figma.com/api/mcp/asset/5a9e1a78-69f1-40d3-9bb9-274a6e3ea365"
+            alt="WiFi"
+          />
+          <img
+            class="icon-battery"
+            src="https://www.figma.com/api/mcp/asset/394fc607-af42-4d1f-b674-cfc09612a034"
+            alt="Battery"
+          />
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="header">
+        <a href="manager-dashboard.html">
+          <img
+            class="back-btn"
+            src="https://www.figma.com/api/mcp/asset/9a73e757-4b3e-45b0-a2eb-b60275ee01df"
+            alt="Back"
+          />
+        </a>
+        <div class="header-text">
+          <div class="header-title">Notifications</div>
+          <div class="header-subtitle">Stay Updated with all Activity</div>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="calendar" style="padding: 8px 24px">
+        <div class="calendar-months">
+          <div class="month-nav">
+            <button class="nav-btn">
+              <img
+                src="https://www.figma.com/api/mcp/asset/c323e6de-4891-41cd-9db4-c4fb2cb77417"
+                alt="Prev"
+              />
+            </button>
+            <span class="month-name">December 2025</span>
+          </div>
+          <div class="date-nav">
+            <button class="nav-btn">
+              <img
+                src="https://www.figma.com/api/mcp/asset/c323e6de-4891-41cd-9db4-c4fb2cb77417"
+                alt="Prev"
+              />
+            </button>
+            <button class="nav-btn">
+              <img
+                src="https://www.figma.com/api/mcp/asset/c323e6de-4891-41cd-9db4-c4fb2cb77417"
+                alt="Next"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="day-labels">
+          <div class="day-label">Sun</div>
+          <div class="day-label">Mon</div>
+          <div class="day-label">Tue</div>
+          <div class="day-label">Wed</div>
+          <div class="day-label">Thur</div>
+          <div class="day-label active">Fri</div>
+          <div class="day-label">Sat</div>
+        </div>
+      </div>
+
+      <!-- Filter Section -->
+      <div class="filter-section">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Unread</button>
+        <button class="filter-btn">Clock In</button>
+        <button class="filter-btn">Leave</button>
+        <button class="filter-btn">Task</button>
+      </div>
+
+      <div class="filter-label">All notifications</div>
+
+      <!-- Content -->
+      <div class="content">
+        <!-- Annual Leave Request -->
+        <div class="notification-card">
+          <div class="notification-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/257a7e74-f7c2-4744-af9b-51b186ed4ed9"
+              alt="Leave"
+            />
+          </div>
+          <div class="notification-details">
+            <div class="notification-title">Annual Leave Request</div>
+            <div class="notification-desc">Princess Favour</div>
+          </div>
+          <button class="notification-expand">
+            <img
+              src="https://www.figma.com/api/mcp/asset/1b24eeb1-4179-4e3a-8f63-cd362cec8a32"
+              alt="Expand"
+            />
+          </button>
+        </div>
+
+        <!-- Task Completion -->
+        <div class="notification-card">
+          <div class="notification-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/ccbc7969-8ee1-49df-91c8-ae85bfcb00cf"
+              alt="Task"
+            />
+          </div>
+          <div class="notification-details">
+            <div class="notification-title">Task Completion</div>
+            <div class="notification-desc">Okhonmina Abba</div>
+          </div>
+          <button class="notification-expand">
+            <img
+              src="https://www.figma.com/api/mcp/asset/1b24eeb1-4179-4e3a-8f63-cd362cec8a32"
+              alt="Expand"
+            />
+          </button>
+        </div>
+
+        <!-- Late Clock-In -->
+        <div class="notification-card">
+          <div class="notification-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/f97931a2-2763-43f0-accd-0416497c2bfa"
+              alt="Clock"
+            />
+          </div>
+          <div class="notification-details">
+            <div class="notification-title">Late Clock-In</div>
+            <div class="notification-desc">Okhonmina Abba</div>
+          </div>
+          <button class="notification-expand">
+            <img
+              src="https://www.figma.com/api/mcp/asset/1b24eeb1-4179-4e3a-8f63-cd362cec8a32"
+              alt="Expand"
+            />
+          </button>
+        </div>
+
+        <!-- Annual Leave Request (repeated) -->
+        <div class="notification-card">
+          <div class="notification-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/257a7e74-f7c2-4744-af9b-51b186ed4ed9"
+              alt="Leave"
+            />
+          </div>
+          <div class="notification-details">
+            <div class="notification-title">Annual Leave Request</div>
+            <div class="notification-desc">Princess Favour</div>
+          </div>
+          <button class="notification-expand">
+            <img
+              src="https://www.figma.com/api/mcp/asset/1b24eeb1-4179-4e3a-8f63-cd362cec8a32"
+              alt="Expand"
+            />
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <a class="nav-item" href="manager-dashboard.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/b5a0ef35-9e13-4266-8d5a-09ed32744f79"
+            alt="Home"
+          />
+          <span>Home</span>
+        </a>
+        <a class="nav-item" href="staff-availability.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/270156c6-607d-4dd4-a0c8-c2c68b5757f6"
+            alt="Task"
+          />
+          <span>Task</span>
+        </a>
+        <a class="nav-item" href="leave-management.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/257a7e74-f7c2-4744-af9b-51b186ed4ed9"
+            alt="Leave"
+          />
+          <span>Leave</span>
+        </a>
+        <div class="nav-item active">
+          <img
+            src="https://www.figma.com/api/mcp/asset/22fe974b-bdf4-45b2-9a43-25cd8ffa0970"
+            alt="Notification"
+          />
+          <span>Notification</span>
+        </div>
+        <a class="nav-item" href="profile.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/e13365ad-0812-4394-8bab-2b22cdd2f655"
+            alt="Profile"
+          />
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

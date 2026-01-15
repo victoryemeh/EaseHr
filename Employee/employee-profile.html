@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", "Graphik Trial", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        position: relative;
+        width: 402px;
+        height: 896px;
+        background: #f5f7fa;
+        /* border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden; */
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* HEADER */
+      .header {
+        background: #f5f7fa;
+        padding: 16px 32px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+      }
+
+      .header-back-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #0f172a;
+        cursor: pointer;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .header-back-btn:hover {
+        opacity: 0.7;
+      }
+
+      .header-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .header-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .header-subtitle {
+        font-size: 14px;
+        font-weight: 300;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      /* MAIN CONTENT */
+      .content {
+        flex: 1;
+        padding: 24px;
+        /* overflow-y: auto; */
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      /* PROFILE CARD */
+      .profile-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 16px 12px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-end;
+      }
+
+      .profile-header {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .profile-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .profile-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .profile-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .profile-role {
+        font-size: 14px;
+        font-weight: 400;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .profile-badge {
+        background: #22c55e;
+        color: #000;
+        border-radius: 16px;
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 400;
+        font-family: "Graphik Trial", sans-serif;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+      }
+
+      /* SECTION */
+      .section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .section-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .section-edit {
+        font-size: 12px;
+        font-weight: 500;
+        color: rgba(15, 23, 42, 0.6);
+        font-family: "Graphik Trial", sans-serif;
+        text-decoration: underline;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .section-edit:hover {
+        color: #0f172a;
+      }
+
+      /* INFO CARDS */
+      .info-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .info-card {
+        background: #ffffff;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        padding: 12px;
+        display: flex;
+        gap: 4px;
+        align-items: flex-start;
+      }
+
+      .info-card:first-child {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+      }
+
+      .info-card:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom: none;
+      }
+
+      .info-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .info-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .info-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 125px;
+      }
+
+      .info-label {
+        font-size: 14px;
+        font-weight: 400;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      .info-value {
+        font-size: 14px;
+        font-weight: 500;
+        color: #0f172a;
+        font-family: "Graphik Trial", sans-serif;
+      }
+
+      /* LOG OUT BUTTON */
+      .btn-logout {
+        background: none;
+        border: none;
+        color: #c50303;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: "Graphik Trial", sans-serif;
+        cursor: pointer;
+        padding: 12px 0;
+        margin: 16px auto 0;
+        transition: opacity 0.3s;
+      }
+
+      .btn-logout:hover {
+        opacity: 0.7;
+      }
+
+      /* BOTTOM NAVIGATION */
+      /* .bottom-nav {
+        background: #f5f7fa;
+        border-top: 1px solid rgba(15, 23, 42, 0.05);
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        height: 108px;
+        position: relative;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex: 1;
+        text-decoration: none;
+        color: #0f172a;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 12px;
+        font-weight: 300;
+        font-family: "Graphik Trial", sans-serif;
+        transition: color 0.3s;
+      }
+
+      .nav-item img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-item.active {
+        color: #14b8a6;
+      }
+
+      .nav-item.active img {
+        filter: invert(62%) sepia(38%) saturate(1200%) hue-rotate(129deg);
+      } */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 378px;
+        max-width: 100%;
+        height: 108px;
+        background-color: #f5f7fa;
+        border-top: 0px solid #0f172a;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 12px;
+        z-index: 100;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-icon img {
+        width: 26px;
+        height: 26px;
+      }
+
+      .nav-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 300;
+        font-size: 12px;
+        color: #0f172a;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .nav-item.active .nav-label {
+        color: #14b8a6;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .container {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-content">
+          <div class="header-title">User Profile</div>
+          <div class="header-subtitle">
+            Keep your profile details up to date
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Profile Card -->
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar">
+              <img
+                src="https://www.figma.com/api/mcp/asset/335e310b-9783-471a-bffc-325c2b126a88"
+                alt="Avatar"
+              />
+            </div>
+            <div class="profile-details">
+              <div class="profile-name">Princess Favour</div>
+              <div class="profile-role">UI/UX Designer</div>
+            </div>
+          </div>
+          <div class="profile-badge">Employee</div>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">Contact Information</div>
+            <button class="section-edit" onclick="editContactInfo()">
+              Edit
+            </button>
+          </div>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/e084d7d5-fac3-44f7-9034-3a5249dc7e55"
+                  alt="email"
+                />
+              </div>
+              <div class="info-content">
+                <div class="info-label">Email</div>
+                <div class="info-value">princessfavour@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/7705c27d-7852-4c20-872d-43f6b590cbdb"
+                  alt="phone"
+                />
+              </div>
+              <div class="info-content">
+                <div class="info-label">Phone Number</div>
+                <div class="info-value">+234 709 5554 3433</div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/60a4741c-9c45-4c76-878a-f4e7b52b7d17"
+                  alt="location"
+                />
+              </div>
+              <div class="info-content">
+                <div class="info-label">Location</div>
+                <div class="info-value">Lagos, Nigeria</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employment Information Section -->
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">Employment Information</div>
+          </div>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/7705c27d-7852-4c20-872d-43f6b590cbdb"
+                  alt="department"
+                />
+              </div>
+              <div class="info-content">
+                <div class="info-label">Department</div>
+                <div class="info-value">Product Design</div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/3cb8fe49-f941-4d4c-a49c-f629bfa9b7c7"
+                  alt="id"
+                />
+              </div>
+              <div class="info-content">
+                <div class="info-label">ID Number</div>
+                <div class="info-value">123476543</div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/5e1e7524-c356-4f6e-aefb-591c7ada48c7"
+                  alt="tenure"
+                />
+              </div>
+              <div class="info-content">
+                <div class="info-label">Tenure</div>
+                <div class="info-value">3 Years, 4 months</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Log Out Button -->
+        <button class="btn-logout" onclick="handleLogout()">Log Out</button>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <!-- <div class="bottom-nav">
+        <a class="nav-item" href="dashboard.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/d3db508d-d55d-437b-8729-69829b04ad6d"
+            alt="home"
+          />
+          Home
+        </a>
+        <a class="nav-item" href="time-clock.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/9109e37e-80c1-448f-a45a-6a21c5e56692"
+            alt="time-clock"
+          />
+          Time Clock
+        </a>
+        <a class="nav-item" href="leave-application.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/b2710361-e2d1-4ec4-bdca-9a5e7af4983a"
+            alt="leave"
+          />
+          Leave
+        </a>
+        <a class="nav-item" href="employee-notification.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/2c931561-1491-4e2a-8759-544a1bd6e05a"
+            alt="notification"
+          />
+          Notification
+        </a>
+        <button class="nav-item active">
+          <img
+            src="https://www.figma.com/api/mcp/asset/c26d9b57-222c-4abd-9225-b8e02960353f"
+            alt="profile"
+          />
+          Profile
+        </button>
+      </div> -->
+      <nav class="bottom-nav" data-node-id="1577:8229">
+        <div class="nav-item active">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/f177fc48-3922-4f68-af3b-44385c5a1878"
+              alt="Home"
+            />
+          </div>
+          <span class="nav-label">Home</span>
+        </div>
+        <a class="nav-item" href="/Employee/active-session.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/4b83d0f6-3a11-4959-8182-a50516c8b189"
+              alt="Time Clock"
+            />
+          </div>
+          <span class="nav-label">Time Clock</span>
+        </a>
+        <a class="nav-item" href="/Employee/leave-application.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/dae2fdba-f550-4aa7-8c42-4c042de4ee98"
+              alt="Leave"
+            />
+          </div>
+          <span class="nav-label">Leave</span>
+        </a>
+        <a class="nav-item" href="/Employee/employee-notification.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/e5386640-feba-4f2a-b288-91779562fc3a"
+              alt="Notification"
+            />
+          </div>
+          <span class="nav-label">Notification</span>
+        </a>
+        <a class="nav-item" href="/Employee/employee-profile.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/4684ea2c-aa99-4a87-8b04-9252a945f693"
+              alt="Profile"
+            />
+          </div>
+          <span class="nav-label active">Profile</span>
+        </a>
+      </nav>
+    </div>
+
+    <script>
+      function editContactInfo() {
+        alert("Edit contact information form would open here");
+        console.log("Edit contact info clicked");
+      }
+
+      function handleLogout() {
+        const confirm = window.confirm("Are you sure you want to log out?");
+        if (confirm) {
+          alert("Logging out...");
+          console.log("User logged out");
+          // Redirect to login page after 1 second
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 1000);
+        }
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+        document.querySelector(".status-bar-time").textContent = time;
+      }
+
+      function goBack() {
+        window.history.back();
+      }
+
+      // Initialize
+      updateTime();
+      setInterval(updateTime, 60000); // Update status bar time every minute
+    </script>
+  </body>
+</html>

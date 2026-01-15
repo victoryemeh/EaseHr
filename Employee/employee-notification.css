@@ -1,0 +1,397 @@
+/* ===========================
+   CSS Reset & Base Styles
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Design System Variables
+   =========================== */
+:root {
+  /* Ease HR Colors */
+  --primary-text: #0f172a;
+  --success: #22c55e;
+  --background: #f9fafb;
+  --accent: #14b8a6;
+  --white: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.2);
+  --shadow: rgba(0, 0, 0, 0.25);
+
+  /* Typography */
+  --font-family: "Graphik Trial", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: grey;
+  color: var(--primary-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===========================
+   App Container
+   =========================== */
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+/* ===========================
+   Header Section
+   =========================== */
+.header-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 500px;
+  margin: 0 auto;
+  background-color: var(--background);
+}
+
+.header-text {
+  background-color: var(--background);
+  height: 133px;
+  width: 100%;
+  position: relative;
+  padding: 0 32px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 73px;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: var(--font-medium);
+  color: var(--primary-text);
+}
+
+.header-subtitle {
+  font-size: 16px;
+  font-weight: var(--font-light);
+  color: var(--primary-text);
+  margin-top: 10px;
+}
+
+/* ===========================
+   Calendar Widget
+   =========================== */
+.calendar-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 4px;
+  background-color: var(--background);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.calendar-month {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.calendar-arrow,
+.slider-arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+}
+
+.calendar-arrow.left img {
+  transform: scaleY(-1);
+}
+
+.slider-arrow.left img {
+  transform: rotate(180deg);
+}
+
+.calendar-arrow img,
+.slider-arrow img {
+  width: 16px;
+  height: 16px;
+}
+
+.month-text {
+  font-size: 12px;
+  font-weight: var(--font-medium);
+  color: var(--primary-text);
+  padding: 2px 4px;
+}
+
+.date-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 40px;
+  height: 16px;
+  position: relative;
+}
+
+.calendar-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.day-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  padding: 2px 4px;
+  font-size: 12px;
+  font-weight: var(--font-regular);
+  color: var(--primary-text);
+  text-align: center;
+  border-radius: 8px;
+}
+
+.day-label.active {
+  background-color: var(--accent);
+}
+
+/* ===========================
+   Notification Section
+   =========================== */
+.notification-section {
+  width: 500px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  height: 32px;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: var(--font-regular);
+  color: var(--primary-text);
+  background: transparent;
+  border: 1px solid var(--primary-text);
+  cursor: pointer;
+  box-shadow: 0px 2px 10px 0px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.filter-btn:hover {
+  opacity: 0.8;
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: var(--font-regular);
+  color: var(--primary-text);
+}
+
+/* ===========================
+   Notification Cards
+   =========================== */
+.notification-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notification-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px;
+  background-color: var(--white);
+  border-radius: 8px;
+  border-bottom: 0.5px solid var(--border-color);
+  box-shadow: 0px 0px 4px 0px var(--shadow);
+  overflow: hidden;
+}
+
+.notification-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.notification-icon img {
+  width: 26px;
+  height: 26px;
+}
+
+.notification-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 286px;
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: var(--font-medium);
+  color: var(--primary-text);
+}
+
+.notification-desc {
+  font-size: 14px;
+  font-weight: var(--font-regular);
+  color: var(--primary-text);
+  white-space: pre-wrap;
+}
+
+.notification-expand {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  transform: rotate(90deg);
+}
+
+.notification-expand img {
+  width: 16px;
+  height: 16px;
+}
+/* BOTTOM NAVIGATION */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 378px;
+  max-width: 100%;
+  height: 108px;
+  background-color: #f5f7fa;
+  border-top: 0px solid #0f172a;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 56px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon img {
+  width: 26px;
+  height: 26px;
+}
+
+.nav-label {
+  font-family: "Graphik Trial", sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: #0f172a;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.nav-item.active .nav-label {
+  color: #14b8a6;
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 100%;
+  }
+
+  .header-section,
+  .notification-section {
+    width: calc(100% - 24px);
+    padding: 0 12px;
+  }
+
+  .bottom-nav {
+    width: 100%;
+  }
+}
+
+/* ===========================
+   Utility Classes
+   =========================== */
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* End of employee-notification.css */

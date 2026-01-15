@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EaseHR - Employee Dashboard</title>
+    <link rel="stylesheet" href="../assets/global.css" />
+    <style>
+      /* ===========================
+           Reset & Base
+           =========================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, sans-serif;
+        background-color: #f5f7fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        /* overflow: hidden; */
+      }
+
+      /* ===========================
+           Dashboard Container
+           =========================== */
+      .dashboard-container {
+        position: relative;
+        width: 100%;
+        max-width: 402px;
+        height: 100vh;
+        background-color: #f5f7fa;
+
+        /* overflow-y: auto;
+        overflow-x: hidden; */
+        padding-bottom: 120px;
+      }
+
+      /* ===========================
+           Header Section
+           =========================== */
+      .header-section {
+        padding: 24px;
+        margin-top: 60px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #f5f7fa;
+      }
+
+      .user-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background-color: #7c3aed;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .user-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .user-greeting {
+        flex: 1;
+      }
+
+      .user-greeting h2 {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 500;
+        font-size: 18px;
+        color: #0f172a;
+        margin: 0;
+        line-height: 1.2;
+      }
+
+      .user-greeting p {
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        color: #0f172a;
+        margin: 0;
+        line-height: 1.2;
+      }
+
+      /* ===========================
+           Cards
+           =========================== */
+      .dashboard-content {
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .card-header {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .card-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 600;
+        font-size: 16.7px;
+        color: #0f172a;
+        margin: 0;
+      }
+
+      .card-subtitle {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #0f172a;
+        margin: 0;
+      }
+
+      /* ===========================
+           Daily Task Card
+           =========================== */
+      .task-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .task-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .task-bullet {
+        width: 8px;
+        height: 8px;
+        background-color: #0f172a;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 6px;
+      }
+
+      .task-text {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        color: #0f172a;
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      /* ===========================
+           Clock In Button
+           =========================== */
+      .btn-clock-in {
+        width: 100%;
+        height: 56px;
+        background-color: #14b8a6;
+        border: none;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 500;
+        font-size: 16.7px;
+        color: #0f172a;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-clock-in:hover {
+        background-color: #12a594;
+      }
+
+      .btn-clock-in:active {
+        transform: scale(0.98);
+      }
+
+      .btn-clock-in img {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* ===========================
+           Calendar
+           =========================== */
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .calendar-month {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #0f172a;
+      }
+
+      .calendar-arrow {
+        width: 16px;
+        height: 16px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .calendar-arrow img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .calendar-arrow.prev img {
+        transform: rotate(180deg);
+      }
+
+      .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+      }
+
+      .calendar-day {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px 4px;
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: #0f172a;
+        text-align: center;
+        border-radius: 8px;
+        min-width: 40px;
+        min-height: 32px;
+        background-color: transparent;
+      }
+
+      .calendar-day.active {
+        background-color: #14b8a6;
+        font-weight: 500;
+      }
+
+      /* ===========================
+           Quick Actions
+           =========================== */
+      .quick-actions {
+        margin-top: 12px;
+      }
+
+      .quick-actions-title {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 600;
+        font-size: 16.7px;
+        color: #0f172a;
+        margin-bottom: 12px;
+      }
+
+      .quick-actions-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .action-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .action-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.15);
+      }
+
+      .action-icon {
+        width: 32px;
+        height: 32px;
+        margin: 0 auto;
+      }
+
+      .action-icon img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .action-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        color: #0f172a;
+        margin: 0;
+      }
+
+      .action-desc {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 300;
+        font-size: 12px;
+        color: #0f172a;
+        margin: 0;
+        text-decoration: underline;
+      }
+
+      /* ===========================
+           Bottom Navigation
+           =========================== */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 378px;
+        max-width: 100%;
+        height: 108px;
+        background-color: #f5f7fa;
+        border-top: 0px solid #0f172a;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 12px;
+        z-index: 100;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-icon img {
+        width: 26px;
+        height: 26px;
+      }
+
+      .nav-label {
+        font-family: "Graphik Trial", sans-serif;
+        font-weight: 300;
+        font-size: 12px;
+        color: #0f172a;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .nav-item.active .nav-label {
+        color: #14b8a6;
+      }
+
+      /* ===========================
+           Animations
+           =========================== */
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card {
+        animation: slideIn 0.5s ease-out;
+      }
+
+      /* ===========================
+           Responsive
+           =========================== */
+      @media (max-width: 402px) {
+        .dashboard-container {
+          border-radius: 0;
+          max-width: 100%;
+        }
+
+        .status-bar,
+        .bottom-nav {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dashboard Container -->
+    <div class="dashboard-container" data-node-id="1577:8225">
+      <!-- Header Section -->
+      <div class="header-section" data-node-id="1577:8230">
+        <div class="user-avatar" data-node-id="1577:8233">
+          <img
+            src="https://www.figma.com/api/mcp/asset/3ffa9c10-5db8-4032-acc9-1716a618262f"
+            alt="Princess Avatar"
+          />
+        </div>
+        <div class="user-greeting" data-node-id="1577:8234">
+          <h2>Welcome, Princess</h2>
+          <p>Ready for the day?</p>
+        </div>
+      </div>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Your Daily Task Card -->
+        <div class="card" data-node-id="1577:8226">
+          <div class="card-header">
+            <h3 class="card-title">Your Daily Task</h3>
+            <p class="card-subtitle">Assigned Task :</p>
+          </div>
+          <div class="task-list">
+            <div class="task-item">
+              <div class="task-bullet"></div>
+              <p class="task-text">Student Portal Security Audit</p>
+            </div>
+            <div class="task-item">
+              <div class="task-bullet"></div>
+              <p class="task-text">Virtual Lab Connectivity Test</p>
+            </div>
+            <div class="task-item">
+              <div class="task-bullet"></div>
+              <p class="task-text">Semester Firmware Update</p>
+            </div>
+          </div>
+          <a href="/Employee/time-clock.html" class="btn-clock-in">
+            <img
+              src="https://www.figma.com/api/mcp/asset/9ed8c2e5-61ff-4720-afdb-cf25a5855d00"
+              alt="Clock"
+            />
+            Clock In
+          </a>
+        </div>
+
+        <!-- Weekly Schedule Card -->
+        <div class="card" data-node-id="1577:8227">
+          <div class="card-header">
+            <h3 class="card-title">Weekly Schedule</h3>
+            <p class="card-subtitle">Your Week at a Glance :</p>
+          </div>
+          <div class="calendar-header">
+            <div class="calendar-month">
+              <span>December 2025</span>
+              <button class="calendar-arrow">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/808409be-d09a-4d12-ad83-1103149f2871"
+                  alt="Next"
+                />
+              </button>
+            </div>
+            <div style="display: flex; gap: 8px">
+              <button class="calendar-arrow prev">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/808409be-d09a-4d12-ad83-1103149f2871"
+                  alt="Prev"
+                />
+              </button>
+              <button class="calendar-arrow">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/808409be-d09a-4d12-ad83-1103149f2871"
+                  alt="Next"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="calendar-days">
+            <div class="calendar-day">Sun</div>
+            <div class="calendar-day active">Mon</div>
+            <div class="calendar-day">Tue</div>
+            <div class="calendar-day active">Wed</div>
+            <div class="calendar-day active">Thur</div>
+            <div class="calendar-day active">Fri</div>
+            <div class="calendar-day">Sat</div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions" data-node-id="1577:8228">
+          <h3 class="quick-actions-title">Quick Actions</h3>
+          <div class="quick-actions-grid">
+            <div class="action-card">
+              <div class="action-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/f177fc48-3922-4f68-af3b-44385c5a1878"
+                  alt="Leave"
+                />
+              </div>
+              <p class="action-label">Leave Request</p>
+              <p class="action-desc">Approve or request leave</p>
+            </div>
+            <div class="action-card">
+              <div class="action-icon">
+                <img
+                  src="https://www.figma.com/api/mcp/asset/165a917f-1bb8-464f-9829-2fbd223152bc"
+                  alt="Tasks"
+                />
+              </div>
+              <p class="action-label">Completed Tasks</p>
+              <p class="action-desc">See all</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav" data-node-id="1577:8229">
+        <div class="nav-item active">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/f177fc48-3922-4f68-af3b-44385c5a1878"
+              alt="Home"
+            />
+          </div>
+          <span class="nav-label">Home</span>
+        </div>
+        <a class="nav-item" href="/Employee/active-session.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/4b83d0f6-3a11-4959-8182-a50516c8b189"
+              alt="Time Clock"
+            />
+          </div>
+          <span class="nav-label">Time Clock</span>
+        </a>
+        <a class="nav-item" href="/Employee/leave-application.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/dae2fdba-f550-4aa7-8c42-4c042de4ee98"
+              alt="Leave"
+            />
+          </div>
+          <span class="nav-label">Leave</span>
+        </a>
+        <a class="nav-item" href="/Employee/employee-notification.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/e5386640-feba-4f2a-b288-91779562fc3a"
+              alt="Notification"
+            />
+          </div>
+          <span class="nav-label">Notification</span>
+        </a>
+        <a class="nav-item" href="/Employee/employee-profile.html">
+          <div class="nav-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/4684ea2c-aa99-4a87-8b04-9252a945f693"
+              alt="Profile"
+            />
+          </div>
+          <span class="nav-label">Profile</span>
+        </a>
+      </nav>
+    </div>
+
+    <script>
+      // ===========================
+      // Calendar Navigation
+      // ===========================
+      const calendarArrows = document.querySelectorAll(".calendar-arrow");
+      const calendarDays = document.querySelectorAll(".calendar-day");
+      let currentMonth = 11; // December
+      let currentYear = 2025;
+
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      calendarArrows.forEach((arrow, index) => {
+        arrow.addEventListener("click", () => {
+          if (arrow.classList.contains("prev")) {
+            currentMonth--;
+            if (currentMonth < 0) {
+              currentMonth = 11;
+              currentYear--;
+            }
+          } else {
+            currentMonth++;
+            if (currentMonth > 11) {
+              currentMonth = 0;
+              currentYear++;
+            }
+          }
+          updateCalendar();
+        });
+      });
+
+      function updateCalendar() {
+        document.querySelector(
+          ".calendar-month span"
+        ).textContent = `${months[currentMonth]} ${currentYear}`;
+      }
+
+      // ===========================
+      // Clock In Button
+      // ===========================
+      const clockInBtn = document.querySelector(".btn-clock-in");
+      clockInBtn.addEventListener("click", () => {
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        });
+        alert(`Clocked in at ${time}`);
+        console.log("Clock in:", time);
+      });
+
+      // ===========================
+      // Navigation Item Active State
+      // ===========================
+      const navItems = document.querySelectorAll(".nav-item");
+      navItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+          // Only toggle if not a link
+          if (!item.href || item.href === window.location.href) {
+            e.preventDefault();
+            navItems.forEach((ni) => ni.classList.remove("active"));
+            item.classList.add("active");
+          }
+        });
+      });
+
+      // ===========================
+      // Quick Actions
+      // ===========================
+      const actionCards = document.querySelectorAll(".action-card");
+      actionCards.forEach((card, index) => {
+        card.addEventListener("click", () => {
+          if (index === 0) {
+            console.log("Leave Request clicked");
+            window.location.href = "leave.html";
+          } else {
+            console.log("Completed Tasks clicked");
+            alert("Completed tasks page coming soon!");
+          }
+        });
+      });
+
+      // ===========================
+      // Update Time
+      // ===========================
+      function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        document.querySelector(
+          ".status-bar .time"
+        ).textContent = `${hours}:${minutes}`;
+      }
+
+      // Update time every minute
+      updateTime();
+      setInterval(updateTime, 60000);
+
+      console.log("EaseHR Dashboard - Loaded");
+    </script>
+  </body>
+</html>

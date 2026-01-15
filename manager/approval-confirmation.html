@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Approval Confirmation - EaseHR</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f5f7fa;
+        --text: #0f172a;
+        --accent: #14b8a6;
+        --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 16px;
+        color: var(--text);
+      }
+
+      .container {
+        position: relative;
+        width: 402px;
+        height: 874px;
+        background: var(--bg);
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Status Bar */
+      .status-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 19px 24px 14px;
+        font-family: "SF Pro", sans-serif;
+        background: var(--bg);
+      }
+
+      .status-time {
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+      }
+
+      .status-levels {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .status-levels img {
+        display: block;
+      }
+
+      .icon-cellular {
+        width: 19.2px;
+        height: 12.226px;
+      }
+
+      .icon-wifi {
+        width: 17.142px;
+        height: 12.328px;
+      }
+
+      .icon-battery {
+        width: 27.328px;
+        height: 13px;
+      }
+
+      /* Success Content */
+      .success-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding: 40px 24px;
+      }
+
+      .success-icon {
+        width: 72px;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .success-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .success-message {
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      /* Home Button */
+      .home-button-wrapper {
+        padding: 0 24px;
+        margin-top: auto;
+        margin-bottom: 24px;
+      }
+
+      .btn-home {
+        width: 100%;
+        height: 56px;
+        border: none;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--text);
+        font-size: 16.7px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-home:hover {
+        background: #12a594;
+      }
+
+      .btn-home:active {
+        transform: scale(0.99);
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        height: 108px;
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        background: #ffffff;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 300;
+        cursor: pointer;
+      }
+
+      .nav-item img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-item.active {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-levels">
+          <img
+            class="icon-cellular"
+            src="https://www.figma.com/api/mcp/asset/b64514bb-7c41-4f57-8621-2572549957b7"
+            alt="Cellular"
+          />
+          <img
+            class="icon-wifi"
+            src="https://www.figma.com/api/mcp/asset/5376743f-71cb-4110-935f-ca52daf89a24"
+            alt="WiFi"
+          />
+          <img
+            class="icon-battery"
+            src="https://www.figma.com/api/mcp/asset/e514181a-9480-4f8a-94d9-ab4d61d0b0a7"
+            alt="Battery"
+          />
+        </div>
+      </div>
+
+      <!-- Success Content -->
+      <div class="success-container">
+        <div class="success-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/9a73e757-4b3e-45b0-a2eb-b60275ee01df"
+            alt="Success"
+          />
+        </div>
+        <div class="success-message">Leave Approved</div>
+      </div>
+
+      <!-- Home Button -->
+      <div class="home-button-wrapper">
+        <button class="btn-home" onclick="goHome()">Home</button>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <div class="bottom-nav">
+        <a class="nav-item" href="manager-dashboard.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/c7bad421-10a8-4f75-8724-dcc6d817931c"
+            alt="Home"
+          />
+          <span>Home</span>
+        </a>
+        <a class="nav-item" href="staff-availability.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/cefbf5e5-2542-44cd-9dd3-03c67c06b6c2"
+            alt="Task"
+          />
+          <span>Task</span>
+        </a>
+        <div class="nav-item active">
+          <img
+            src="https://www.figma.com/api/mcp/asset/2d952653-d71d-4d21-9def-a8797400def0"
+            alt="Leave"
+          />
+          <span>Leave</span>
+        </div>
+        <a class="nav-item" href="index.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/ca691a38-5eca-4415-a91d-f93e72851cb6"
+            alt="Notification"
+          />
+          <span>Notification</span>
+        </a>
+        <a class="nav-item" href="profile.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/1f73b242-ea41-44e2-a832-4bbd3eb2bdd4"
+            alt="Profile"
+          />
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      function goHome() {
+        window.location.href = "manager-dashboard.html";
+      }
+    </script>
+  </body>
+</html>

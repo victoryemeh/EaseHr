@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Styles Usage Guide - EaseHR</title>
+    <link rel="stylesheet" href="global.css" />
+    <style>
+      body {
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .guide-section {
+        margin-bottom: 48px;
+        padding: 24px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .guide-section h2 {
+        margin-bottom: 16px;
+        color: var(--color-text);
+        border-bottom: 2px solid var(--color-primary);
+        padding-bottom: 8px;
+      }
+
+      .guide-section h3 {
+        margin-top: 24px;
+        margin-bottom: 12px;
+        color: var(--color-text);
+      }
+
+      .code-block {
+        background: #f8fafc;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: 16px;
+        margin: 12px 0;
+        overflow-x: auto;
+      }
+
+      .code-block code {
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        color: #0f172a;
+      }
+
+      .preview-box {
+        border: 2px dashed var(--color-border);
+        border-radius: var(--radius-md);
+        padding: 24px;
+        margin: 16px 0;
+        background: #fafbfc;
+      }
+
+      .color-swatch {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+      }
+
+      table th,
+      table td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      table th {
+        background: #f8fafc;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="margin-bottom: 32px; color: var(--color-primary)">
+      EaseHR Form Styles Usage Guide
+    </h1>
+
+    <!-- ===========================
+         CSS VARIABLES
+         =========================== -->
+    <div class="guide-section">
+      <h2>🎨 CSS Variables (Design Tokens)</h2>
+      <p>All form styles use CSS variables for easy theming:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Value</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--color-primary</code></td>
+            <td>
+              <span class="color-swatch" style="background: #14b8a6"></span>
+              #14b8a6
+            </td>
+            <td>Primary brand color, buttons, focus</td>
+          </tr>
+          <tr>
+            <td><code>--color-text</code></td>
+            <td>
+              <span class="color-swatch" style="background: #0f172a"></span>
+              #0f172a
+            </td>
+            <td>Main text color</td>
+          </tr>
+          <tr>
+            <td><code>--color-muted</code></td>
+            <td>
+              <span class="color-swatch" style="background: #64748b"></span>
+              #64748b
+            </td>
+            <td>Secondary text, icons</td>
+          </tr>
+          <tr>
+            <td><code>--color-border</code></td>
+            <td>
+              <span class="color-swatch" style="background: #e2e8f0"></span>
+              #e2e8f0
+            </td>
+            <td>Input borders, dividers</td>
+          </tr>
+          <tr>
+            <td><code>--color-danger</code></td>
+            <td>
+              <span class="color-swatch" style="background: #dc2626"></span>
+              #dc2626
+            </td>
+            <td>Error states</td>
+          </tr>
+          <tr>
+            <td><code>--color-success</code></td>
+            <td>
+              <span class="color-swatch" style="background: #16a34a"></span>
+              #16a34a
+            </td>
+            <td>Success states</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===========================
+         BASIC FORM STRUCTURE
+         =========================== -->
+    <div class="guide-section">
+      <h2>📝 Basic Form Structure</h2>
+      <p>
+        Use <code>.form-group</code> to wrap each field. This provides
+        consistent spacing.
+      </p>
+
+      <div class="code-block">
+        <code>
+          &lt;div class="form-group"&gt;<br />
+          &nbsp;&nbsp;&lt;label class="form-label" for="email"&gt;Email&lt;/label&gt;<br />
+          &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="email" type="email" placeholder="Enter your email" /&gt;<br />
+          &nbsp;&nbsp;&lt;/div&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <h3>Preview:</h3>
+        <div class="form-group">
+          <label class="form-label" for="demo-email">Email</label>
+          <div class="input-wrapper">
+            <input
+              id="demo-email"
+              type="email"
+              placeholder="Enter your email"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         INPUT WITH ICON
+         =========================== -->
+    <div class="guide-section">
+      <h2>🔍 Input with Icon</h2>
+      <p>Add <code>.input-icon</code> inside <code>.input-wrapper</code>:</p>
+
+      <div class="code-block">
+        <code>
+          &lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&lt;span class="input-icon"&gt;📧&lt;/span&gt;<br />
+          &nbsp;&nbsp;&lt;input type="email" placeholder="Email address" /&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <h3>Preview:</h3>
+        <div class="form-group">
+          <label class="form-label">Email with Icon</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input type="email" placeholder="Email address" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         PASSWORD TOGGLE
+         =========================== -->
+    <div class="guide-section">
+      <h2>👁️ Password with Toggle</h2>
+      <p>
+        Use <code>.eye-icon</code> for password visibility toggle. Add
+        JavaScript to toggle the input type.
+      </p>
+
+      <div class="code-block">
+        <code>
+          &lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&lt;input id="password" type="password" placeholder="Password" /&gt;<br />
+          &nbsp;&nbsp;&lt;span class="eye-icon" onclick="togglePassword('password')"&gt;👁️&lt;/span&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <h3>Preview:</h3>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+            <input
+              id="demo-password"
+              type="password"
+              placeholder="Enter password"
+            />
+            <span
+              class="eye-icon"
+              onclick="document.getElementById('demo-password').type = document.getElementById('demo-password').type === 'password' ? 'text' : 'password'"
+              >👁️</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         VALIDATION STATES
+         =========================== -->
+    <div class="guide-section">
+      <h2>✅ Validation States</h2>
+
+      <h3>Invalid State</h3>
+      <p>Add <code>.field-invalid</code> to the <code>.form-group</code>:</p>
+
+      <div class="code-block">
+        <code>
+          &lt;div class="form-group field-invalid"&gt;<br />
+          &nbsp;&nbsp;&lt;label class="form-label"&gt;Email&lt;/label&gt;<br />
+          &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="email" value="invalid-email" /&gt;<br />
+          &nbsp;&nbsp;&lt;/div&gt;<br />
+          &nbsp;&nbsp;&lt;div class="error-text"&gt;Please enter a valid email address&lt;/div&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <h3>Preview:</h3>
+        <div class="form-group field-invalid">
+          <label class="form-label">Email</label>
+          <div class="input-wrapper">
+            <input type="email" value="invalid-email" />
+          </div>
+          <div class="error-text">Please enter a valid email address</div>
+        </div>
+      </div>
+
+      <h3>Helper Text</h3>
+      <p>Use <code>.helper-text</code> for hints:</p>
+
+      <div class="preview-box">
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+            <input type="password" placeholder="Enter password" />
+          </div>
+          <div class="helper-text">Must be at least 6 characters long</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         BUTTONS
+         =========================== -->
+    <div class="guide-section">
+      <h2>🔘 Buttons</h2>
+
+      <h3>Primary Button</h3>
+      <div class="code-block">
+        <code> &lt;button class="btn-primary" type="submit"&gt;Log In&lt;/button&gt; </code>
+      </div>
+
+      <div class="preview-box">
+        <button class="btn-primary" type="button">Log In</button>
+      </div>
+
+      <h3>Secondary Button</h3>
+      <div class="code-block">
+        <code> &lt;button class="btn-secondary"&gt;Cancel&lt;/button&gt; </code>
+      </div>
+
+      <div class="preview-box">
+        <button class="btn-secondary" type="button">Cancel</button>
+      </div>
+
+      <h3>Disabled Button</h3>
+      <div class="preview-box">
+        <button class="btn-primary" type="button" disabled>
+          Processing...
+        </button>
+      </div>
+    </div>
+
+    <!-- ===========================
+         MESSAGE BOXES
+         =========================== -->
+    <div class="guide-section">
+      <h2>💬 Message Boxes</h2>
+
+      <h3>Error Message</h3>
+      <div class="code-block">
+        <code>
+          &lt;div class="message error"&gt;Invalid credentials. Please try
+          again.&lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <div class="message error">
+          Invalid credentials. Please try again.
+        </div>
+      </div>
+
+      <h3>Success Message</h3>
+      <div class="code-block">
+        <code>
+          &lt;div class="message success"&gt;Account created successfully!&lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <div class="message success">Account created successfully!</div>
+      </div>
+
+      <p>
+        <strong>Pro Tip:</strong> Use
+        <code>style="display: none"</code> initially and toggle with JavaScript
+        (see <code>showError()</code> and <code>showSuccess()</code> helpers in
+        api.js).
+      </p>
+    </div>
+
+    <!-- ===========================
+         STANDALONE INPUTS
+         =========================== -->
+    <div class="guide-section">
+      <h2>⚡ Standalone Inputs (without wrapper)</h2>
+      <p>
+        If you don't need icons, use <code>.input</code> class directly on the
+        input:
+      </p>
+
+      <div class="code-block">
+        <code>
+          &lt;input type="text" class="input" placeholder="Enter your name" /&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <input type="text" class="input" placeholder="Enter your name" />
+      </div>
+    </div>
+
+    <!-- ===========================
+         TEXTAREA
+         =========================== -->
+    <div class="guide-section">
+      <h2>📄 Textarea</h2>
+
+      <div class="code-block">
+        <code>
+          &lt;div class="form-group"&gt;<br />
+          &nbsp;&nbsp;&lt;label class="form-label"&gt;Message&lt;/label&gt;<br />
+          &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;textarea placeholder="Enter your message" rows="4"&gt;&lt;/textarea&gt;<br />
+          &nbsp;&nbsp;&lt;/div&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <div class="input-wrapper">
+            <textarea placeholder="Enter your message" rows="4"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         SELECT DROPDOWN
+         =========================== -->
+    <div class="guide-section">
+      <h2>📋 Select Dropdown</h2>
+
+      <div class="code-block">
+        <code>
+          &lt;div class="form-group"&gt;<br />
+          &nbsp;&nbsp;&lt;label class="form-label"&gt;Role&lt;/label&gt;<br />
+          &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;select&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Select role&lt;/option&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Employee&lt;/option&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Manager&lt;/option&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;/select&gt;<br />
+          &nbsp;&nbsp;&lt;/div&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <div class="preview-box">
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <div class="input-wrapper">
+            <select>
+              <option>Select role</option>
+              <option>Employee</option>
+              <option>Manager</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         COMPLETE FORM EXAMPLE
+         =========================== -->
+    <div class="guide-section">
+      <h2>🎯 Complete Form Example</h2>
+
+      <div class="preview-box">
+        <form onsubmit="event.preventDefault(); alert('Form submitted!')">
+          <div class="form-group">
+            <label class="form-label" for="example-name">Full Name</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input
+                id="example-name"
+                type="text"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="example-email-2">Email</label>
+            <div class="input-wrapper">
+              <span class="input-icon">📧</span>
+              <input
+                id="example-email-2"
+                type="email"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            <div class="helper-text">We'll never share your email</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="example-password-2">Password</label>
+            <div class="input-wrapper">
+              <input
+                id="example-password-2"
+                type="password"
+                placeholder="Enter password"
+                required
+              />
+              <span
+                class="eye-icon"
+                onclick="document.getElementById('example-password-2').type = document.getElementById('example-password-2').type === 'password' ? 'text' : 'password'"
+                >👁️</span
+              >
+            </div>
+            <div class="helper-text">Minimum 6 characters</div>
+          </div>
+
+          <button class="btn-primary" type="submit">Create Account</button>
+
+          <p style="text-align: center; margin-top: 16px; font-size: 14px">
+            Already have an account? <a href="#" style="color: var(--color-primary)">Log In</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===========================
+         JAVASCRIPT HELPERS
+         =========================== -->
+    <div class="guide-section">
+      <h2>🛠️ JavaScript Helpers</h2>
+      <p>
+        The <code>assets/api.js</code> file includes helper functions for
+        messages:
+      </p>
+
+      <div class="code-block">
+        <code>
+          // Show error message<br />
+          showError("Invalid email address");<br /><br />
+
+          // Show success message<br />
+          showSuccess("Account created successfully!");<br /><br />
+
+          // Validation helpers<br />
+          Validator.email(email);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+          Returns true/false<br />
+          Validator.password(password);&nbsp;&nbsp;&nbsp;//
+          Min 6 chars<br />
+          Validator.required(value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
+          Non-empty<br />
+          Validator.matchPasswords(p1, p2); // Passwords match<br />
+        </code>
+      </div>
+    </div>
+
+    <!-- ===========================
+         MIGRATION GUIDE
+         =========================== -->
+    <div class="guide-section">
+      <h2>🔄 Migration Guide</h2>
+      <p>To migrate existing forms to use centralized styles:</p>
+
+      <ol style="line-height: 1.8">
+        <li>
+          Add <code>&lt;link rel="stylesheet" href="../assets/global.css" /&gt;</code> to the <code>&lt;head&gt;</code>
+        </li>
+        <li>
+          Replace custom form styles with the classes documented here
+        </li>
+        <li>
+          Update message divs to use <code>class="message error"</code> or
+          <code>class="message success"</code>
+        </li>
+        <li>
+          Remove inline styles for borders, colors, padding (now handled by
+          classes)
+        </li>
+        <li>Use CSS variables for colors instead of hardcoded values</li>
+      </ol>
+
+      <h3>Before:</h3>
+      <div class="code-block">
+        <code>
+          &lt;div style="margin-bottom: 16px"&gt;<br />
+          &nbsp;&nbsp;&lt;input style="border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px" /&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+
+      <h3>After:</h3>
+      <div class="code-block">
+        <code>
+          &lt;div class="form-group"&gt;<br />
+          &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input placeholder="Enter value" /&gt;<br />
+          &nbsp;&nbsp;&lt;/div&gt;<br />
+          &lt;/div&gt;
+        </code>
+      </div>
+    </div>
+
+    <!-- ===========================
+         FOOTER
+         =========================== -->
+    <div style="text-align: center; margin-top: 48px; color: var(--color-muted)">
+      <p>
+        📚 For more information, see <code>assets/global.css</code> or contact
+        the development team.
+      </p>
+      <p style="margin-top: 8px">
+        <strong>EaseHR</strong> &bull; Centralized Form System v1.0
+      </p>
+    </div>
+  </body>
+</html>

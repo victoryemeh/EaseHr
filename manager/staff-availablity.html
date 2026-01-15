@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Availability</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f5f7fa;
+        --text: #0f172a;
+        --muted: #4b5563;
+        --accent: #14b8a6;
+        --success: #22c55e;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      body {
+        font-family: "Graphik Trial", "Inter", sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .page {
+        max-width: 420px;
+        margin: 0 auto;
+        padding: 0 20px 140px;
+        background-color: var(--bg);
+        position: relative;
+      }
+
+      /* Status bar */
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0 6px;
+        font-family: "SF Pro", sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        color: #000;
+      }
+
+      .status-icons {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .status-icon {
+        height: 13px;
+        width: auto;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0 20px;
+      }
+
+      .back-icon {
+        width: 24px;
+        height: 24px;
+        transform: rotate(180deg) scaleY(-1);
+      }
+
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+
+      /* Calendar */
+      .calendar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 8px 0 16px;
+      }
+
+      .month-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .month-label {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .chevrons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .chevron {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .day-pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 0;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 400;
+        color: var(--text);
+        background: transparent;
+      }
+
+      .day-pill.active {
+        background: var(--accent);
+      }
+
+      /* Status buttons */
+      .status-filters {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 16px 0;
+      }
+
+      .status-btn {
+        padding: 8px 16px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 400;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .status-btn.available {
+        background: var(--success);
+        color: #fff;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      }
+
+      .status-btn.busy {
+        background: transparent;
+        color: var(--text);
+        border: 0.5px solid var(--warning);
+      }
+
+      .status-btn.leave {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--danger);
+      }
+
+      /* Section title */
+      .section-title {
+        font-size: 12px;
+        color: var(--text);
+        margin: 16px 0 8px;
+      }
+
+      /* Staff list */
+      .staff-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      /* Cards */
+      .card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: var(--card-shadow);
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .card-top {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+        position: relative;
+      }
+
+      .card-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .card-position {
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .status-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--success);
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .assign-btn {
+        align-self: flex-end;
+        background: var(--bg);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .assign-btn:hover {
+        background: #e8ecf0;
+      }
+
+      /* Bottom nav */
+      .bottom-nav {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 420px;
+        height: 108px;
+        background: #fff;
+        border-top: 1px solid var(--text);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 12px;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-label {
+        font-size: 12px;
+        font-weight: 300;
+        text-align: center;
+      }
+
+      .nav-item.active .nav-label {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- Header -->
+      <div class="header">
+        <div>
+          <div class="title">Staff Availability</div>
+          <div class="subtitle">Select a staff to assign New Task</div>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="calendar">
+        <div class="month-row">
+          <div class="month-label">December 2025</div>
+          <div class="chevrons">
+            <img
+              class="chevron"
+              src="https://www.figma.com/api/mcp/asset/ff77984a-1cb3-4d83-96fc-63ff34ca4834"
+              alt="Prev"
+            />
+            <img
+              class="chevron"
+              src="https://www.figma.com/api/mcp/asset/ff77984a-1cb3-4d83-96fc-63ff34ca4834"
+              alt="Next"
+            />
+          </div>
+        </div>
+        <div class="weekdays">
+          <div class="day-pill">Sun</div>
+          <div class="day-pill">Mon</div>
+          <div class="day-pill">Tus</div>
+          <div class="day-pill">Wed</div>
+          <div class="day-pill">Thur</div>
+          <div class="day-pill active">Fri</div>
+          <div class="day-pill">Sat</div>
+        </div>
+      </div>
+
+      <!-- Status filters -->
+      <div class="status-filters">
+        <button class="status-btn available">Available</button>
+        <button class="status-btn busy">Busy</button>
+        <button class="status-btn leave">Staff On Leave</button>
+      </div>
+
+      <!-- Section intro -->
+      <div class="section-title">
+        Total Staff Available for Task Assignment :
+      </div>
+
+      <!-- Staff list -->
+      <div class="staff-list">
+        <!-- Card 1 -->
+        <div class="card">
+          <div class="card-top">
+            <img
+              class="avatar"
+              src="https://www.figma.com/api/mcp/asset/c5aadcad-ba7e-470a-9cce-17402f2cf4f4"
+              alt="Princess Favour"
+            />
+            <div class="card-content">
+              <div class="card-name">Name: Princess Favour</div>
+              <div class="card-position">Position: Product Designer</div>
+              <div class="status-dot"></div>
+            </div>
+          </div>
+          <button class="assign-btn">Assign Task</button>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <div class="card-top">
+            <img
+              class="avatar"
+              src="https://www.figma.com/api/mcp/asset/a87ef819-3129-4fc9-9f9a-c0bc57fc2266"
+              alt="Okhonmina Abba"
+            />
+            <div class="card-content">
+              <div class="card-name">Name : Okhonmina Abba</div>
+              <div class="card-position">Position : Cybersecurity</div>
+              <div class="status-dot"></div>
+            </div>
+          </div>
+          <button class="assign-btn">Assign Task</button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-top">
+            <img
+              class="avatar"
+              src="https://www.figma.com/api/mcp/asset/d62b8c3d-e13e-482a-bb81-5ee0caedeaf9"
+              alt="Blessing Valentine"
+            />
+            <div class="card-content">
+              <div class="card-name">Name : Blessing Valentine</div>
+              <div class="card-position">Position : Technical Writer</div>
+              <div class="status-dot"></div>
+            </div>
+          </div>
+          <button class="assign-btn">Assign Task</button>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <div class="card-top">
+            <img
+              class="avatar"
+              src="https://www.figma.com/api/mcp/asset/525ea6d1-3a79-421c-bc73-9c21fd11efde"
+              alt="Sandra Josephine"
+            />
+            <div class="card-content">
+              <div class="card-name">Name : Sandra Josephine</div>
+              <div class="card-position">Position : Front End Developer</div>
+              <div class="status-dot"></div>
+            </div>
+          </div>
+          <button class="assign-btn">Assign Task</button>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card">
+          <div class="card-top">
+            <img
+              class="avatar"
+              src="https://www.figma.com/api/mcp/asset/03ff8bd6-1012-4eaf-9c19-5b2c2e7ea3d4"
+              alt="Additional Staff"
+            />
+            <div class="card-content">
+              <div class="card-name">Name : Additional Staff</div>
+              <div class="card-position">Position: Backend Developer</div>
+              <div class="status-dot"></div>
+            </div>
+          </div>
+          <button class="assign-btn">Assign Task</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom navigation -->
+    <nav class="bottom-nav">
+      <a class="nav-item" href="manager-dashboard.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/4166ed56-cf8a-4f13-80e1-7b7b88e72eae"
+          alt="Home"
+        />
+        <span class="nav-label">Home</span>
+      </a>
+      <a class="nav-item active" href="staff-availability.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/db08e315-74b4-4339-86d9-ea141bea0164"
+          alt="Task"
+        />
+        <span class="nav-label">Task</span>
+      </a>
+      <a class="nav-item" href="track-leave-status.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/0396a476-1f65-40d2-ba49-d46a6673bd53"
+          alt="Leave"
+        />
+        <span class="nav-label">Leave</span>
+      </a>
+      <a class="nav-item" href="index.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/4095f2d6-111d-4f85-b2cb-658cdc13375e"
+          alt="Notification"
+        />
+        <span class="nav-label">Notification</span>
+      </a>
+      <a class="nav-item" href="profile.html">
+        <img
+          class="nav-icon"
+          src="https://www.figma.com/api/mcp/asset/ec31d9c0-390e-45bc-b13c-6bae45c86962"
+          alt="Profile"
+        />
+        <span class="nav-label">Profile</span>
+      </a>
+    </nav>
+  </body>
+</html>
