@@ -171,9 +171,11 @@
       <div class="code-block">
         <code>
           &lt;div class="form-group"&gt;<br />
-          &nbsp;&nbsp;&lt;label class="form-label" for="email"&gt;Email&lt;/label&gt;<br />
+          &nbsp;&nbsp;&lt;label class="form-label"
+          for="email"&gt;Email&lt;/label&gt;<br />
           &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="email" type="email" placeholder="Enter your email" /&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="email" type="email"
+          placeholder="Enter your email" /&gt;<br />
           &nbsp;&nbsp;&lt;/div&gt;<br />
           &lt;/div&gt;
         </code>
@@ -205,7 +207,8 @@
         <code>
           &lt;div class="input-wrapper"&gt;<br />
           &nbsp;&nbsp;&lt;span class="input-icon"&gt;📧&lt;/span&gt;<br />
-          &nbsp;&nbsp;&lt;input type="email" placeholder="Email address" /&gt;<br />
+          &nbsp;&nbsp;&lt;input type="email" placeholder="Email address"
+          /&gt;<br />
           &lt;/div&gt;
         </code>
       </div>
@@ -235,8 +238,10 @@
       <div class="code-block">
         <code>
           &lt;div class="input-wrapper"&gt;<br />
-          &nbsp;&nbsp;&lt;input id="password" type="password" placeholder="Password" /&gt;<br />
-          &nbsp;&nbsp;&lt;span class="eye-icon" onclick="togglePassword('password')"&gt;👁️&lt;/span&gt;<br />
+          &nbsp;&nbsp;&lt;input id="password" type="password"
+          placeholder="Password" /&gt;<br />
+          &nbsp;&nbsp;&lt;span class="eye-icon"
+          onclick="togglePassword('password')"&gt;👁️&lt;/span&gt;<br />
           &lt;/div&gt;
         </code>
       </div>
@@ -275,9 +280,11 @@
           &lt;div class="form-group field-invalid"&gt;<br />
           &nbsp;&nbsp;&lt;label class="form-label"&gt;Email&lt;/label&gt;<br />
           &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="email" value="invalid-email" /&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="email" value="invalid-email"
+          /&gt;<br />
           &nbsp;&nbsp;&lt;/div&gt;<br />
-          &nbsp;&nbsp;&lt;div class="error-text"&gt;Please enter a valid email address&lt;/div&gt;<br />
+          &nbsp;&nbsp;&lt;div class="error-text"&gt;Please enter a valid email
+          address&lt;/div&gt;<br />
           &lt;/div&gt;
         </code>
       </div>
@@ -315,7 +322,9 @@
 
       <h3>Primary Button</h3>
       <div class="code-block">
-        <code> &lt;button class="btn-primary" type="submit"&gt;Log In&lt;/button&gt; </code>
+        <code>
+          &lt;button class="btn-primary" type="submit"&gt;Log In&lt;/button&gt;
+        </code>
       </div>
 
       <div class="preview-box">
@@ -354,15 +363,14 @@
       </div>
 
       <div class="preview-box">
-        <div class="message error">
-          Invalid credentials. Please try again.
-        </div>
+        <div class="message error">Invalid credentials. Please try again.</div>
       </div>
 
       <h3>Success Message</h3>
       <div class="code-block">
         <code>
-          &lt;div class="message success"&gt;Account created successfully!&lt;/div&gt;
+          &lt;div class="message success"&gt;Account created
+          successfully!&lt;/div&gt;
         </code>
       </div>
 
@@ -390,7 +398,8 @@
 
       <div class="code-block">
         <code>
-          &lt;input type="text" class="input" placeholder="Enter your name" /&gt;
+          &lt;input type="text" class="input" placeholder="Enter your name"
+          /&gt;
         </code>
       </div>
 
@@ -410,7 +419,8 @@
           &lt;div class="form-group"&gt;<br />
           &nbsp;&nbsp;&lt;label class="form-label"&gt;Message&lt;/label&gt;<br />
           &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&lt;textarea placeholder="Enter your message" rows="4"&gt;&lt;/textarea&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;textarea placeholder="Enter your message"
+          rows="4"&gt;&lt;/textarea&gt;<br />
           &nbsp;&nbsp;&lt;/div&gt;<br />
           &lt;/div&gt;
         </code>
@@ -438,7 +448,8 @@
           &nbsp;&nbsp;&lt;label class="form-label"&gt;Role&lt;/label&gt;<br />
           &nbsp;&nbsp;&lt;div class="input-wrapper"&gt;<br />
           &nbsp;&nbsp;&nbsp;&nbsp;&lt;select&gt;<br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Select role&lt;/option&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Select
+          role&lt;/option&gt;<br />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Employee&lt;/option&gt;<br />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;Manager&lt;/option&gt;<br />
           &nbsp;&nbsp;&nbsp;&nbsp;&lt;/select&gt;<br />
@@ -517,7 +528,8 @@
           <button class="btn-primary" type="submit">Create Account</button>
 
           <p style="text-align: center; margin-top: 16px; font-size: 14px">
-            Already have an account? <a href="#" style="color: var(--color-primary)">Log In</a>
+            Already have an account?
+            <a href="#" style="color: var(--color-primary)">Log In</a>
           </p>
         </form>
       </div>
@@ -544,8 +556,7 @@
           // Validation helpers<br />
           Validator.email(email);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
           Returns true/false<br />
-          Validator.password(password);&nbsp;&nbsp;&nbsp;//
-          Min 6 chars<br />
+          Validator.password(password);&nbsp;&nbsp;&nbsp;// Min 6 chars<br />
           Validator.required(value);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//
           Non-empty<br />
           Validator.matchPasswords(p1, p2); // Passwords match<br />
@@ -562,11 +573,13 @@
 
       <ol style="line-height: 1.8">
         <li>
-          Add <code>&lt;link rel="stylesheet" href="../assets/global.css" /&gt;</code> to the <code>&lt;head&gt;</code>
+          Add
+          <code
+            >&lt;link rel="stylesheet" href="../assets/global.css" /&gt;</code
+          >
+          to the <code>&lt;head&gt;</code>
         </li>
-        <li>
-          Replace custom form styles with the classes documented here
-        </li>
+        <li>Replace custom form styles with the classes documented here</li>
         <li>
           Update message divs to use <code>class="message error"</code> or
           <code>class="message success"</code>
@@ -582,7 +595,8 @@
       <div class="code-block">
         <code>
           &lt;div style="margin-bottom: 16px"&gt;<br />
-          &nbsp;&nbsp;&lt;input style="border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px" /&gt;<br />
+          &nbsp;&nbsp;&lt;input style="border: 1px solid #e2e8f0; padding: 12px;
+          border-radius: 8px" /&gt;<br />
           &lt;/div&gt;
         </code>
       </div>
@@ -602,7 +616,9 @@
     <!-- ===========================
          FOOTER
          =========================== -->
-    <div style="text-align: center; margin-top: 48px; color: var(--color-muted)">
+    <div
+      style="text-align: center; margin-top: 48px; color: var(--color-muted)"
+    >
       <p>
         📚 For more information, see <code>assets/global.css</code> or contact
         the development team.
