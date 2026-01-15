@@ -1,0 +1,8 @@
+{
+  "routes": [
+    { "src": "/", "dest": "/Onboarding/splash.html" },
+    { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
+    { "src": "/learn-more", "dest": "/learn-more.html" },
+    { "src": "/about-us", "dest": "/about-us.html" }
+  ]
+}
