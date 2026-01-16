@@ -1,5 +1,44 @@
 // API Configuration and Utility Functions
+// API Configuration and Utility Functions
+// IMPORTANT: Add this to your HTML files (before api.js):
+// <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 const API_BASE_URL = "https://ease-hr.onrender.com";
+
+// Configure axios defaults
+if (typeof axios !== "undefined") {
+  axios.defaults.baseURL = API_BASE_URL;
+  axios.defaults.headers.common["Content-Type"] = "application/json";
+  axios.defaults.timeout = 15000; // 15s timeout to avoid hanging
+  axios.defaults.withCredentials = false; // using Bearer tokens, not cookies
+
+  // Interceptors for debugging and consistent error handling
+  axios.interceptors.request.use((config) => {
+    const method = (config.method || "GET").toUpperCase();
+    try {
+      console.log(`[API ▶] ${method} ${API_BASE_URL}${config.url}`);
+    } catch (_) {}
+    return config;
+  });
+
+  axios.interceptors.response.use(
+    (response) => {
+      const method = (response.config?.method || "GET").toUpperCase();
+      try {
+        console.log(`[API ✓] ${method} ${API_BASE_URL}${response.config?.url} → ${response.status}`);
+      } catch (_) {}
+      return response;
+    },
+    (error) => {
+      const cfg = error.config || {};
+      const method = (cfg.method || "GET").toUpperCase();
+      try {
+        console.warn(`[API ✗] ${method} ${API_BASE_URL}${cfg.url} → ${error.response?.status ?? 'NETWORK/CORS'}`);
+      } catch (_) {}
+      return Promise.reject(error);
+    }
+  );
+}
 
 // Token management
 const TokenManager = {
@@ -19,58 +58,65 @@ const TokenManager = {
 };
 
 // API Request Handler
+// API Request Handler using Axios
 const apiRequest = async (
   endpoint,
-  method,
+  method = "GET",
   body = null,
   requiresAuth = true
 ) => {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-
-  if (requiresAuth) {
-    const token = TokenManager.getToken();
-    if (!token) {
-      throw new Error("Unauthorized: No token found");
-    }
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-
   try {
     const config = {
       method,
-      headers,
+      url: endpoint,
     };
 
-    if (body) {
-      config.body = JSON.stringify(body);
+    // Add auth header if required
+    if (requiresAuth) {
+      const token = TokenManager.getToken();
+      if (!token) {
+        throw new Error("Unauthorized: No token found");
+      }
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+      };
     }
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-
-    if (!response.ok) {
-      let errorMessage = `HTTP ${response.status}`;
-      try {
-        const errorData = await response.json();
-        errorMessage = errorData.message || errorMessage;
-      } catch (e) {
-        // Response isn't JSON
-      }
-
-      if (response.status === 401) {
-        TokenManager.clear();
-        window.location.href = "/Onboarding/select-role.html";
-      }
-
-      throw new Error(errorMessage);
+    // Add body for POST/PUT/PATCH requests
+    if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
+      config.data = body;
     }
 
-    const data = await response.json();
-    return data;
+    const response = await axios(config);
+    return response.data;
   } catch (error) {
-    console.error("API Error:", error);
-    throw error;
+    // Handle axios errors
+    if (error.response) {
+      // Server responded with error status
+      const status = error.response.status;
+      const message = error.response.data?.message || `HTTP ${status}`;
+
+      if (status === 401) {
+        TokenManager.clear();
+        window.location.href = "./Onboarding/select-role.html";
+      }
+
+      console.error("API Error:", message);
+      throw new Error(message);
+    } else if (error.request) {
+      // Request made but no response received (network/CORS error)
+      console.error("Network Error:", error.message);
+      const corsMsg =
+        "Network error: Could not reach server. Check CORS settings on backend and ensure:\n" +
+        "- Backend allows requests from your domain\n" +
+        "- Backend includes 'Access-Control-Allow-Origin' header\n" +
+        "- Backend includes 'Access-Control-Allow-Credentials' if using cookies";
+      throw new Error(corsMsg);
+    } else {
+      // Error in request setup
+      console.error("Error:", error.message);
+      throw error;
+    }
   }
 };
 
