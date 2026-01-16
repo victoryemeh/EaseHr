@@ -25,7 +25,9 @@ if (typeof axios !== "undefined") {
     (response) => {
       const method = (response.config?.method || "GET").toUpperCase();
       try {
-        console.log(`[API ✓] ${method} ${API_BASE_URL}${response.config?.url} → ${response.status}`);
+        console.log(
+          `[API ✓] ${method} ${API_BASE_URL}${response.config?.url} → ${response.status}`
+        );
       } catch (_) {}
       return response;
     },
@@ -33,7 +35,11 @@ if (typeof axios !== "undefined") {
       const cfg = error.config || {};
       const method = (cfg.method || "GET").toUpperCase();
       try {
-        console.warn(`[API ✗] ${method} ${API_BASE_URL}${cfg.url} → ${error.response?.status ?? 'NETWORK/CORS'}`);
+        console.warn(
+          `[API ✗] ${method} ${API_BASE_URL}${cfg.url} → ${
+            error.response?.status ?? "NETWORK/CORS"
+          }`
+        );
       } catch (_) {}
       return Promise.reject(error);
     }
