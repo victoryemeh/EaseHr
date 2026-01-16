@@ -14,6 +14,49 @@
         font-family: "Inter", sans-serif;
         /* tried matching the font in the image as much as possible. You get? If you know the font, you can replace this. */
       }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        background-color: white;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px 0;
+        border-top: 1px solid #e5e7eb;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        color: #6b7280;
+        font-size: 12px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .nav-item img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .nav-item.active {
+        color: #14b8a6;
+      }
+
+      .nav-item:hover {
+        color: #14b8a6;
+      }
     </style>
   </head>
 
@@ -225,6 +268,45 @@
           </div>
         </div>
       </section>
+
+      <!-- Bottom navigation -->
+      <div class="bottom-nav">
+        <a class="nav-item" href="./dashboard.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8bff8bfc-487b-4cad-96fb-9f31027d2770"
+            alt="Home"
+          />
+          <span>Home</span>
+        </a>
+        <a class="nav-item" href="./attendance.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/222b01af-a106-4ecb-9126-709be0ee3586"
+            alt="Task"
+          />
+          <span>Task</span>
+        </a>
+        <a class="nav-item active" href="./leave-app-mgt.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/77957ebb-3f84-4800-92aa-c8cabac34535"
+            alt="Leave"
+          />
+          <span>Leave</span>
+        </a>
+        <a class="nav-item" href="./notifications.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/6af7dc57-7ca4-4daf-9dda-01d43d543441"
+            alt="Notification"
+          />
+          <span>Notification</span>
+        </a>
+        <a class="nav-item" href="./profile.html">
+          <img
+            src="https://www.figma.com/api/mcp/asset/e13365ad-0812-4394-8bab-2b22cdd2f655"
+            alt="Profile"
+          />
+          <span>Profile</span>
+        </a>
+      </div>
     </div>
   </body>
 </html>
