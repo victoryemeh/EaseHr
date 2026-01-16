@@ -299,5 +299,16 @@
 
       <!-- <div class="home-indicator"></div> -->
     </div>
+
+    <script>
+      // Handle form submission
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Here you would normally send data to API
+        // For now, just redirect to confirmation page
+        window.location.href = "./leave-ubmitted.html";
+      });
+    </script>
   </body>
 </html>
