@@ -1,5 +1,4 @@
 // API Configuration and Utility Functions
-// API Configuration and Utility Functions
 // IMPORTANT: Add this to your HTML files (before api.js):
 // <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -16,7 +15,8 @@ if (typeof axios !== "undefined") {
   axios.interceptors.request.use((config) => {
     const method = (config.method || "GET").toUpperCase();
     try {
-      console.log(`[API ▶] ${method} ${API_BASE_URL}${config.url}`);
+    //   console.log([API ▶️] ${method} ${API_BASE_URL}${config.url});
+    //   console.log('[API DATA]', config.data); 
     } catch (_) {}
     return config;
   });
@@ -25,9 +25,9 @@ if (typeof axios !== "undefined") {
     (response) => {
       const method = (response.config?.method || "GET").toUpperCase();
       try {
-        console.log(
-          `[API ✓] ${method} ${API_BASE_URL}${response.config?.url} → ${response.status}`
-        );
+        // console.log(
+        //   [API ✓] ${method} ${API_BASE_URL}${response.config?.url} → ${response.status}
+        // );
       } catch (_) {}
       return response;
     },
@@ -40,6 +40,9 @@ if (typeof axios !== "undefined") {
             error.response?.status ?? "NETWORK/CORS"
           }`
         );
+        if (error.response?.data) {
+          console.warn('[API ERROR DATA]', error.response.data);
+        }
       } catch (_) {}
       return Promise.reject(error);
     }
@@ -63,7 +66,6 @@ const TokenManager = {
   },
 };
 
-// API Request Handler
 // API Request Handler using Axios
 const apiRequest = async (
   endpoint,
@@ -73,8 +75,9 @@ const apiRequest = async (
 ) => {
   try {
     const config = {
-      method,
+      method: method.toUpperCase(), // Ensure uppercase
       url: endpoint,
+      headers: {} // Initialize headers object
     };
 
     // Add auth header if required
@@ -83,15 +86,19 @@ const apiRequest = async (
       if (!token) {
         throw new Error("Unauthorized: No token found");
       }
-      config.headers = {
-        Authorization: `Bearer ${token}`,
-      };
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     // Add body for POST/PUT/PATCH requests
-    if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
+    if (body && ["POST", "PUT", "PATCH"].includes(method.toUpperCase())) {
       config.data = body;
+      // Ensure Content-Type is set
+      if (!config.headers["Content-Type"]) {
+        config.headers["Content-Type"] = "application/json";
+      }
     }
+
+    console.log('[API REQUEST CONFIG]', config); // Debug log
 
     const response = await axios(config);
     return response.data;
@@ -99,15 +106,15 @@ const apiRequest = async (
     // Handle axios errors
     if (error.response) {
       // Server responded with error status
-      const status = error.response.status;
-      const message = error.response.data?.message || `HTTP ${status}`;
+      const statuses = error.response.status;
+      const message = error.response.data?.message || error.response.data?.error || `HTTP ${statuses}`  ;
 
-      if (status === 401) {
+      if (statuses === 401) {
         TokenManager.clear();
         window.location.href = "./Onboarding/select-role.html";
       }
 
-      console.error("API Error:", message);
+      console.error("API Error:", message, error.response.data);
       throw new Error(message);
     } else if (error.request) {
       // Request made but no response received (network/CORS error)
