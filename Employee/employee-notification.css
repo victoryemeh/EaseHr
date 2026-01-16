@@ -14,7 +14,7 @@
   /* Ease HR Colors */
   --primary-text: #0f172a;
   --success: #22c55e;
-  --background: #f9fafb;
+  --background: #ffffff;
   --accent: #14b8a6;
   --white: #ffffff;
   --border-color: rgba(0, 0, 0, 0.2);
@@ -31,7 +31,7 @@
 
 body {
   font-family: var(--font-family);
-  background-color: grey;
+  background-color: white;
   color: var(--primary-text);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -302,12 +302,13 @@ body {
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  max-width: 100%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
   height: 108px;
-  background-color: #f5f7fa;
+  background-color: var(--background);
   border-top: 0px solid #0f172a;
   display: flex;
   align-items: flex-start;
