@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   navItems.forEach((item) => {
     item.addEventListener("click", function (e) {
-      e.preventDefault();
+      // Don't prevent default - let links navigate
 
       // Remove active class from all nav items
       navItems.forEach((navItem) => navItem.classList.remove("active"));
