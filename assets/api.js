@@ -21,7 +21,7 @@ const TokenManager = {
 // API Request Handler
 const apiRequest = async (
   endpoint,
-  method = "GET",
+  method,
   body = null,
   requiresAuth = true
 ) => {
