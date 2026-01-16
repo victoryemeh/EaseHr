@@ -6,12 +6,35 @@
     { "src": "/employee-signup", "dest": "/Onboarding/employee-signup.html" },
     { "src": "/manager-login", "dest": "/Onboarding/manager-login.html" },
     { "src": "/manager-signup", "dest": "/Onboarding/manager-signup.html" },
+    { "src": "/verify-account", "dest": "/Onboarding/verify-account.html" },
     { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
-    { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
-    { "src": "/learn-more", "dest": "/learn-more.html" },
-    { "src": "/about-us", "dest": "/about-us.html" },
-    { "src": "/dashboard", "dest": "/Employee/dashboard.html" },
-    { "src": "/learn-more", "dest": "/learn-more.html" },
-    { "src": "/about-us", "dest": "/about-us.html" }
+    { "src": "/active-session", "dest": "/Employee/active-session.html" },
+    { "src": "/confirm-daily-log", "dest": "/Employee/confirm-daily-log.html" },
+    {
+      "src": "/employee-notification",
+      "dest": "/Employee/employee-notification.html"
+    },
+    { "src": "/employee-profile", "dest": "/Employee/profile.html" },
+    { "src": "/employee-verify", "dest": "/Employee/verify.html" },
+    {
+      "src": "/employees-attendance",
+      "dest": "/Employee/employees-attendance.html"
+    },
+    { "src": "/leave-application", "dest": "/Employee/leave-application.html" },
+    {
+      "src": "/leave-application-form",
+      "dest": "/Employee/leave-application-form.html"
+    },
+    {
+      "src": "/leave-status-tracker",
+      "dest": "/Employee/leave-status-tracker.html"
+    },
+    { "src": "/leave-ubmitted", "dest": "/Employee/leave-ubmitted.html" },
+    { "src": "/time-clock", "dest": "/Employee/time-clock.html" },
+    {
+      "src": "/approval-confirmation",
+      "dest": "/manager/approval-confirmation.html"
+    },
+    { "src": "/attendance", "dest": "/manager/attendance.html" }
   ]
 }
