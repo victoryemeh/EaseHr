@@ -234,15 +234,15 @@
                 "employee",
               );
               console.log(response);
-              TokenManager.setToken(response.data.user.token);
-              TokenManager.setRole(response.data.user.role);
-              TokenManager.setUserId(response.data.user.id);
-              TokenManager.setUser(response.data.user);
+              TokenManager.setToken(response.token);
+              TokenManager.setRole(response.user.role);
+              TokenManager.setUserId(response.user.id);
+              TokenManager.setUser(response.user);
 
               showSuccess("Account created successfully! Redirecting...");
-              //   setTimeout(() => {
-              //     window.location.href = "verify-account.html";
-              //   }, 1500);
+                setTimeout(() => {
+                  window.location.href = "verify-account.html";
+                }, 1500);
             } catch (error) {
               showError(error.message);
             }
