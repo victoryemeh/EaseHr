@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,8 +12,9 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
         /* background-color: #4a5568; */
         padding: 20px;
         min-height: 100vh;
@@ -185,7 +186,7 @@
         <h1 class="page-title">Verify Your Account</h1>
         <p class="verification-info">
           We have sent a 6-digit verification code<br />
-          to employee@gmail.com
+          <!-- to employee@gmail.com -->
         </p>
 
         <div class="code-inputs">
@@ -251,7 +252,7 @@
         const seconds = timeLeft % 60;
         timerElement.textContent = `${String(minutes).padStart(
           2,
-          "0"
+          "0",
         )}:${String(seconds).padStart(2, "0")}`;
 
         if (timeLeft > 0) {

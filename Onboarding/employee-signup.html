@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -231,17 +231,18 @@
                 fullName,
                 email,
                 password,
-                "employee"
+                "employee",
               );
-
-              TokenManager.setToken(response.token);
-              TokenManager.setRole("employee");
-              TokenManager.setUserId(response.id);
+              console.log(response);
+              TokenManager.setToken(response.data.user.token);
+              TokenManager.setRole(response.data.user.role);
+              TokenManager.setUserId(response.data.user.id);
+              TokenManager.setUser(response.data.user);
 
               showSuccess("Account created successfully! Redirecting...");
-              setTimeout(() => {
-                window.location.href = "verify-account.html";
-              }, 1500);
+              //   setTimeout(() => {
+              //     window.location.href = "verify-account.html";
+              //   }, 1500);
             } catch (error) {
               showError(error.message);
             }
