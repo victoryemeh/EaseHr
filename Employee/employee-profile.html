@@ -629,15 +629,15 @@
       }
 
       function handleLogout() {
-        const confirm = window.confirm("Are you sure you want to log out?");
-        if (confirm) {
-          alert("Logging out...");
-          console.log("User logged out");
-          // Redirect to login page after 1 second
-          setTimeout(() => {
-            window.location.href = "login.html";
-          }, 1000);
-        }
+        const confirmed = window.confirm("Are you sure you want to log out?");
+        if (!confirmed) return;
+        try {
+          localStorage.removeItem("easehr_token");
+          localStorage.removeItem("easehr_role");
+          localStorage.removeItem("easehr_userId");
+          localStorage.removeItem("easehr_user");
+        } catch (e) {}
+        window.location.href = "../Onboarding/select-role.html";
       }
 
       function updateTime() {
