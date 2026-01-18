@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (btnEmployee) {
     btnEmployee.addEventListener("click", () => {
-      window.location.href = "employee-login.html";
+      window.location.href = "employee-signup.html";
     });
   }
 
   if (btnManager) {
     btnManager.addEventListener("click", () => {
-      window.location.href = "manager-login.html";
+      window.location.href = "manager-signup.html";
     });
   }
 

@@ -5,9 +5,15 @@
 }
 
 body {
-  font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
-  background-color: grey;
+  font-family:
+    "Graphik Trial",
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,20 +25,18 @@ body {
            Onboarding Container
            =========================== */
 .onboarding-container {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
   height: 100vh;
   background-color: #f5f7fa;
-
-  overflow: hidden;
 }
 
 /* ===========================
            Logo
            =========================== */
 .logo-header {
-  position: absolute;
   top: calc(8.33% + 21.17px);
   left: 50%;
   transform: translateX(-50%);
@@ -50,7 +54,6 @@ body {
            Illustration
            =========================== */
 .illustration-section {
-  position: absolute;
   top: calc(16.67% + 46.33px);
   left: 50%;
   transform: translateX(-50%);
@@ -69,7 +72,6 @@ body {
            Onboarding Text
            =========================== */
 .onboarding-text {
-  position: absolute;
   right: auto;
   left: auto;
   bottom: 500px;
@@ -102,7 +104,6 @@ body {
            Loading Dots (Progress)
            =========================== */
 .loading-dots {
-  position: absolute;
   top: calc(58.33% + 40.65px);
   left: calc(25% + 74.5px);
   display: flex;
@@ -127,7 +128,6 @@ body {
            Action Buttons
            =========================== */
 .btn-employee {
-  position: absolute;
   top: calc(66.67% + 17.33px);
   left: 50%;
   transform: translateX(-50%);
@@ -154,7 +154,6 @@ body {
 }
 
 .btn-manager {
-  position: absolute;
   top: calc(75% + 12.5px);
   left: 50%;
   transform: translateX(-50%);
@@ -184,7 +183,6 @@ body {
            Login Link
            =========================== */
 .login-link {
-  position: absolute;
   top: calc(83.33% + 23.67px);
   left: 50%;
   transform: translateX(-50%);
@@ -211,7 +209,6 @@ body {
            Home Indicator
            =========================== */
 .home-indicator {
-  position: absolute;
   bottom: 0;
   left: 1px;
   width: 400px;
@@ -219,7 +216,6 @@ body {
 }
 
 .home-indicator-bar {
-  position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
