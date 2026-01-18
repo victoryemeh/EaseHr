@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EaseHR - Employee Dashboard</title>
+    <link rel="icon" type="image/png" href="../assets/small%20EaseHr%20logo.png" />
     <link rel="stylesheet" href="../assets/global.css" />
     <style>
       /* ===========================
@@ -16,8 +17,14 @@
       }
 
       body {
-        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", Roboto, sans-serif;
+        font-family:
+          "Graphik Trial",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
         background-color: #f5f7fa;
         display: flex;
         align-items: center;
@@ -551,7 +558,7 @@
         <a class="nav-item active" href="./dashboard.html">
           <div class="nav-icon">
             <img
-              src="https://www.figma.com/api/mcp/asset/f177fc48-3922-4f68-af3b-44385c5a1878"
+              src="https://www.figma.com/api/mcp/asset/4b83d0f6-3a11-4959-8182-a50516c8b189"
               alt="Home"
             />
           </div>
@@ -560,7 +567,7 @@
         <a class="nav-item" href="./active-session.html">
           <div class="nav-icon">
             <img
-              src="https://www.figma.com/api/mcp/asset/4b83d0f6-3a11-4959-8182-a50516c8b189"
+              src="https://www.figma.com/api/mcp/asset/f177fc48-3922-4f68-af3b-44385c5a1878"
               alt="Time Clock"
             />
           </div>
@@ -640,9 +647,8 @@
       });
 
       function updateCalendar() {
-        document.querySelector(
-          ".calendar-month span"
-        ).textContent = `${months[currentMonth]} ${currentYear}`;
+        document.querySelector(".calendar-month span").textContent =
+          `${months[currentMonth]} ${currentYear}`;
       }
 
       // ===========================
@@ -698,9 +704,8 @@
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, "0");
         const minutes = String(now.getMinutes()).padStart(2, "0");
-        document.querySelector(
-          ".status-bar .time"
-        ).textContent = `${hours}:${minutes}`;
+        document.querySelector(".status-bar .time").textContent =
+          `${hours}:${minutes}`;
       }
 
       // Update time every minute
