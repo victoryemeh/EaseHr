@@ -1,30 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Select Role | EaseHR</title>
-    <link rel="stylesheet" href="../assets/css/auth.css" />
-  </head>
-  <body>
-    <div class="auth-container">
-      <img
-        src="../assets/small EaseHr logo.png"
-        alt="EaseHR logo"
-        class="logo"
-      />
-      <p class="subtitle">Select your role to continue</p>
-
-      <div class="role-buttons">
-        <button onclick="selectRole('employee')">Employee</button>
-        <button onclick="selectRole('manager')" class="outline">Manager</button>
-      </div>
-    </div>
-
-    <script src="../assets/js/auth.js"></script>
-  </body>
-</html> -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,10 +7,9 @@
     <link rel="stylesheet" href="select-role.css" />
   </head>
   <body>
-    <!-- Onboarding Screen -->
-    <div class="onboarding-container" data-node-id="1584:9318">
+    <div class="onboarding-container">
       <!-- Logo -->
-      <div class="logo-header" data-node-id="1584:9320">
+      <div class="logo-header">
         <img
           src="https://www.figma.com/api/mcp/asset/2cb604c5-8076-467b-b5b7-0b21ce3e650a"
           alt="EaseHR Logo"
@@ -44,48 +17,71 @@
       </div>
 
       <!-- Illustration -->
-      <div class="illustration-section" data-node-id="1584:9321">
-        <img src="../assets/illustration.jpeg" alt="Illustration" />
+      <div class="illustration-section">
+        <img
+          src="../assets/illustration.jpeg"
+          alt="Leave Request Illustration"
+        />
       </div>
 
       <!-- Onboarding Text -->
-      <div class="onboarding-text" data-node-id="1574:7394">
-        <h2 data-node-id="1574:7395">Easy Leave Requests</h2>
-        <p data-node-id="1574:7396">
+      <div class="onboarding-text">
+        <h2>Easy Leave Requests</h2>
+        <p>
           Request leave in a few taps and view your balance instantly. No
           emails. No WhatsApp follow-ups.
         </p>
       </div>
 
       <!-- Progress Dots -->
-      <div class="loading-dots" data-node-id="1574:7404">
-        <div class="loading-dot active" data-index="0"></div>
-        <div class="loading-dot" data-index="1"></div>
-        <div class="loading-dot" data-index="2"></div>
+      <div class="loading-dots">
+        <div class="loading-dot active"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
       </div>
 
       <!-- Continue as Employee Button -->
-      <button class="btn-employee" id="btn-employee" data-node-id="1574:7417">
+      <button class="btn-employee" id="btn-employee">
         Continue as Employee
       </button>
 
       <!-- Continue as Manager Button -->
-      <button class="btn-manager" id="btn-manager" data-node-id="1574:7422">
-        Continue as Manager
-      </button>
+      <button class="btn-manager" id="btn-manager">Continue as Manager</button>
 
       <!-- Login Link -->
-      <div class="login-link" data-node-id="1574:7427" id="login-section">
+      <div class="login-link">
         <span class="link-text">Already have an account?</span>
         <span class="link-action" id="login-action">Log In</span>
       </div>
 
       <!-- Home Indicator -->
-      <div class="home-indicator" data-node-id="1584:9324">
-        <div class="home-indicator-bar" data-node-id="1584:9325"></div>
+      <div class="home-indicator">
+        <div class="home-indicator-bar"></div>
       </div>
     </div>
 
-    <script src="select-role-new.js"></script>
+    <!-- <script>
+      document
+        .getElementById("btn-employee")
+        .addEventListener("click", function () {
+          console.log("Continue as Employee clicked");
+          // Add your navigation logic here
+        });
+
+      document
+        .getElementById("btn-manager")
+        .addEventListener("click", function () {
+          console.log("Continue as Manager clicked");
+          // Add your navigation logic here
+        });
+
+      document
+        .getElementById("login-action")
+        .addEventListener("click", function () {
+          console.log("Log In clicked");
+          // Add your navigation logic here
+        });
+    </script> -->
+     <script src="select-role-new.js"></script>
   </body>
 </html>
