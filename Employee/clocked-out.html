@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clocked Out - EaseHR</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="../assets/small%20EaseHr%20logo.png"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Graphik Trial",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: #f5f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        color: #0f172a;
+      }
+
+      .container {
+        position: relative;
+        width: 402px;
+        min-height: 896px;
+        background: #f5f7fa;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header */
+      .header-section {
+        background: #f5f7fa;
+        padding: 24px 0 24px 0;
+        margin-bottom: 24px;
+      }
+
+      .header-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #0f172a;
+        margin-bottom: 8px;
+      }
+
+      .header-subtitle {
+        font-size: 16px;
+        font-weight: 300;
+        color: #0f172a;
+      }
+
+      /* Calendar Widget */
+      .calendar-widget {
+        background: #f5f7fa;
+        border-radius: 8px;
+        padding: 8px 4px;
+        margin-bottom: 24px;
+      }
+
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        padding: 0 4px;
+      }
+
+      .calendar-month {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .calendar-month-text {
+        font-size: 12px;
+        font-weight: 500;
+        color: #0f172a;
+      }
+
+      .calendar-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-arrow {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+      }
+
+      .nav-arrow:hover {
+        opacity: 1;
+      }
+
+      .nav-arrow img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .calendar-weekdays {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .calendar-day {
+        width: 40px;
+        padding: 2px 4px;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #0f172a;
+      }
+
+      .calendar-day.active {
+        background: #14b8a6;
+      }
+
+      /* Attendance Card */
+      .attendance-card {
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        position: relative;
+        margin-bottom: 24px;
+      }
+
+      .attendance-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .attendance-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .attendance-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .attendance-name {
+        font-size: 14px;
+        color: #0f172a;
+      }
+
+      .attendance-name-label {
+        font-weight: 400;
+      }
+
+      .attendance-name-value {
+        font-weight: 500;
+      }
+
+      .attendance-status {
+        font-size: 14px;
+        font-weight: 400;
+        color: #0f172a;
+      }
+
+      .attendance-time {
+        font-size: 14px;
+        font-weight: 500;
+        color: #0f172a;
+      }
+
+      .attendance-icon {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        width: 16px;
+        height: 16px;
+      }
+
+      .attendance-icon img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 402px;
+        max-width: 100%;
+        background: #f5f7fa;
+        border-top: 1px solid rgba(15, 23, 42, 0.1);
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .nav-item-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-item-icon img {
+        width: 26px;
+        height: 26px;
+      }
+
+      .nav-item-label {
+        font-size: 12px;
+        font-weight: 300;
+        color: #0f172a;
+      }
+
+      .nav-item.active .nav-item-label {
+        color: #14b8a6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header Section -->
+      <div class="header-section">
+        <div class="header-title">Good Bye,</div>
+        <div class="header-subtitle">Nice work today, enjoy your day.</div>
+      </div>
+
+      <!-- Calendar Widget -->
+      <div class="calendar-widget">
+        <div class="calendar-header">
+          <div class="calendar-month">
+            <span class="calendar-month-text">December 2025</span>
+            <div class="nav-arrow">
+              <img
+                src="https://www.figma.com/api/mcp/asset/98722399-4186-48a4-ada1-8fa2d01e8418"
+                alt="Arrow"
+              />
+            </div>
+          </div>
+          <div class="calendar-nav">
+            <div class="nav-arrow">
+              <img
+                src="https://www.figma.com/api/mcp/asset/98722399-4186-48a4-ada1-8fa2d01e8418"
+                alt="Previous"
+                style="transform: rotate(180deg)"
+              />
+            </div>
+            <div class="nav-arrow">
+              <img
+                src="https://www.figma.com/api/mcp/asset/98722399-4186-48a4-ada1-8fa2d01e8418"
+                alt="Next"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="calendar-weekdays">
+          <div class="calendar-day">Sun</div>
+          <div class="calendar-day">Mon</div>
+          <div class="calendar-day">Tue</div>
+          <div class="calendar-day">Wed</div>
+          <div class="calendar-day">Thu</div>
+          <div class="calendar-day active">Fri</div>
+          <div class="calendar-day">Sat</div>
+        </div>
+      </div>
+
+      <!-- Attendance Card -->
+      <div class="attendance-card">
+        <div class="attendance-avatar">
+          <img
+            src="https://www.figma.com/api/mcp/asset/4539d2d8-8aeb-46c3-b357-9cfae37d8527"
+            alt="Avatar"
+          />
+        </div>
+        <div class="attendance-info">
+          <div class="attendance-name">
+            <span class="attendance-name-label">Name:</span>
+            <span class="attendance-name-value"> Princess Favour</span>
+          </div>
+          <div class="attendance-status">Clocked Out</div>
+          <div class="attendance-time">08:55am - 07:30pm</div>
+        </div>
+        <div class="attendance-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/ab60a2db-22aa-45f3-a6c5-dbf91165ea83"
+            alt="Icon"
+          />
+        </div>
+      </div>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav">
+        <a href="./dashboard.html" class="nav-item">
+          <div class="nav-item-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/7638f7fd-8284-42e4-bfbb-b59cd668c2d5"
+              alt="Home"
+            />
+          </div>
+          <span class="nav-item-label">Home</span>
+        </a>
+        <a href="#" class="nav-item active">
+          <div class="nav-item-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/f2ea9723-b914-4ac1-acee-9828f9654566"
+              alt="Time Clock"
+            />
+          </div>
+          <span class="nav-item-label">Time Clock</span>
+        </a>
+        <a href="./leave-application.html" class="nav-item">
+          <div class="nav-item-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/aa6236a9-4c7e-4deb-b17f-176a4cadffd2"
+              alt="Leave"
+            />
+          </div>
+          <span class="nav-item-label">Leave</span>
+        </a>
+        <a href="./employee-notification.html" class="nav-item">
+          <div class="nav-item-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/099ca7bd-5d66-4cc3-bcc7-4335ed4405de"
+              alt="Notification"
+            />
+          </div>
+          <span class="nav-item-label">Notification</span>
+        </a>
+        <a href="./employee-profile.html" class="nav-item">
+          <div class="nav-item-icon">
+            <img
+              src="https://www.figma.com/api/mcp/asset/1c8d555f-55b6-4175-a721-a39efed6f852"
+              alt="Profile"
+            />
+          </div>
+          <span class="nav-item-label">Profile</span>
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
