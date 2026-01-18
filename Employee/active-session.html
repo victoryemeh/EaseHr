@@ -766,13 +766,10 @@
           hour12: true,
         });
 
-        alert(`✓ Clocked out at ${timeString}`);
         console.log(`Clocked out: ${timeString}`);
 
-        // Redirect back to dashboard after 2 seconds
-        setTimeout(() => {
-          window.location.href = "./dashboard.html";
-        }, 2000);
+        // Redirect to clocked-out page
+        window.location.href = "./clocked-out.html";
       }
 
       function goBack() {
