@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Detail</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f5f7fa;
+        --text: #0f172a;
+        --accent: #14b8a6;
+        --muted: #4b5563;
+        --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      body {
+        font-family:
+          "Graphik Trial",
+          "Inter",
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 12px;
+      }
+
+      .page {
+        position: relative;
+        width: 100%;
+        max-width: 402px;
+        min-height: 100vh;
+        background: var(--bg);
+        padding: 12px 12px 140px;
+      }
+
+      /* Status bar */
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 4px 14px;
+        font-family: "SF Pro", sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        color: #000;
+      }
+
+      .status-icons {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .status-icon {
+        height: 13px;
+        width: auto;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 0 18px;
+      }
+
+      .back-btn {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      /* Profile card */
+      .profile-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: var(--card-shadow);
+        padding: 12px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 32px;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .profile-text {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 14px;
+      }
+
+      .profile-text .bold {
+        font-weight: 600;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* Tasks */
+      .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .task-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .task-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        color: var(--text);
+      }
+
+      .checkbox {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+
+      /* Bottom nav */
+      .bottom-nav {
+        position: fixed;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 378px;
+        max-width: 100%;
+        background: #fff;
+        border-top: 1px solid rgba(15, 23, 42, 0.1);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 12px;
+        height: 108px;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 56px;
+        text-decoration: none;
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .nav-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-icon img {
+        width: 26px;
+        height: 26px;
+      }
+
+      .nav-label {
+        font-size: 12px;
+        font-weight: 300;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .nav-item.active .nav-label {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- <div class="status-bar">
+        <div>9:41</div>
+        <div class="status-icons">
+          <img
+            class="status-icon"
+            src="https://www.figma.com/api/mcp/asset/11f4ec82-fcd4-40c5-a3af-7c189a4ced14"
+            alt="Cellular"
+          />
+          <img
+            class="status-icon"
+            src="https://www.figma.com/api/mcp/asset/30505569-1147-4f01-8ab8-1a910c686a20"
+            alt="WiFi"
+          />
+          <img
+            class="status-icon"
+            src="https://www.figma.com/api/mcp/asset/6792e0ad-901f-44ad-b717-9ed04ff9a461"
+            alt="Battery"
+          />
+        </div>
+      </div> -->
+
+      <div class="header">
+        
+          
+        <div class="title">Attendance</div>
+      </div>
+
+      <div class="profile-card">
+        <img
+          class="avatar"
+          src="https://www.figma.com/api/mcp/asset/a593c2a7-872b-48be-8d50-4f5cf41148ab"
+          alt="Okhonmina Abba"
+        />
+        <div class="profile-text">
+          <div>Name : <span class="bold">Okhonmina Abba</span></div>
+          <div class="muted">Department : Cybersecurity</div>
+          <div>Clocked In : <span class="bold">9:00 AM - 5:00 pm</span></div>
+        </div>
+      </div>
+
+      <div class="section-title">Task Details</div>
+      <div class="task-list">
+        <div class="task-item">
+          <img
+            class="checkbox"
+            src="https://www.figma.com/api/mcp/asset/e256656d-58de-4378-8942-f02fc4d20980"
+            alt="Checked"
+          />
+          <span>Student Portal Vulnerability Scan</span>
+        </div>
+        <div class="task-item">
+          <img
+            class="checkbox"
+            src="https://www.figma.com/api/mcp/asset/e256656d-58de-4378-8942-f02fc4d20980"
+            alt="Checked"
+          />
+          <span>Cloud-Lab Access Verification</span>
+        </div>
+        <div class="task-item">
+          <img
+            class="checkbox"
+            src="https://www.figma.com/api/mcp/asset/e256656d-58de-4378-8942-f02fc4d20980"
+            alt="Checked"
+          />
+          <span>Firewall Protocol & Integrity Check</span>
+        </div>
+        <div class="task-item">
+          <img
+            class="checkbox"
+            src="https://www.figma.com/api/mcp/asset/e256656d-58de-4378-8942-f02fc4d20980"
+            alt="Checked"
+          />
+          <span>Network Latency & Speed Diagnostics</span>
+        </div>
+        <div class="task-item">
+          <img
+            class="checkbox"
+            src="https://www.figma.com/api/mcp/asset/e256656d-58de-4378-8942-f02fc4d20980"
+            alt="Checked"
+          />
+          <span>Technical Findings Report Submission</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a class="nav-item active" href="./dashboard.html">
+        <div class="nav-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/8a601551-4113-448c-9faf-59bb7cdebb0c"
+            alt="Home"
+          />
+        </div>
+        <span class="nav-label">Home</span>
+      </a>
+      <a class="nav-item" href="./attendance.html">
+        <div class="nav-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/fcb4de69-3534-4043-9518-c588190f8b4e"
+            alt="Task"
+          />
+        </div>
+        <span class="nav-label">Task</span>
+      </a>
+      <a class="nav-item" href="./track-leave-status.html">
+        <div class="nav-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/c0c42fec-cd76-4b35-b29e-1ab8b9b51936"
+            alt="Leave"
+          />
+        </div>
+        <span class="nav-label">Leave</span>
+      </a>
+      <a class="nav-item" href="./notifications.html">
+        <div class="nav-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/182c27ba-adb8-4f91-a617-a3fa69d2f918"
+            alt="Notification"
+          />
+        </div>
+        <span class="nav-label">Notification</span>
+      </a>
+      <a class="nav-item" href="./profile.html">
+        <div class="nav-icon">
+          <img
+            src="https://www.figma.com/api/mcp/asset/e8ff4844-0391-47d6-8d42-f8464d1722d3"
+            alt="Profile"
+          />
+        </div>
+        <span class="nav-label">Profile</span>
+      </a>
+    </nav>
+  </body>
+</html>
