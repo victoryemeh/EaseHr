@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,8 +19,13 @@
       }
 
       body {
-        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
+        font-family:
+          "Graphik Trial",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
         background: var(--bg);
         display: flex;
         justify-content: center;
@@ -31,19 +36,19 @@
       }
 
       .container {
-        position: relative;
-        width: 402px;
-        height: 874px;
+        /* position: relative; */
+        width: 500px;
+        height: 100vh;
         background: var(--bg);
-        border-radius: 24px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
+        /* border-radius: 24px; */
+        /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); */
+        /* overflow: hidden; */
         display: flex;
         flex-direction: column;
       }
 
       /* Status Bar */
-      .status-bar {
+      /* .status-bar {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -81,7 +86,7 @@
       .icon-battery {
         width: 27.328px;
         height: 13px;
-      }
+      } */
 
       /* Success Content */
       .success-container {
@@ -147,6 +152,7 @@
         display: flex;
         justify-content: space-between;
         padding: 12px;
+        width: 500px;
         height: 108px;
         border-top: 1px solid rgba(15, 23, 42, 0.08);
         background: #ffffff;
@@ -177,7 +183,7 @@
   </head>
   <body>
     <div class="container">
-      <!-- Status Bar -->
+      <!-- Status Bar
       <div class="status-bar">
         <div class="status-time">9:41</div>
         <div class="status-levels">
@@ -197,15 +203,12 @@
             alt="Battery"
           />
         </div>
-      </div>
+      </div> -->
 
       <!-- Success Content -->
       <div class="success-container">
         <div class="success-icon">
-          <img
-            src="https://www.figma.com/api/mcp/asset/9a73e757-4b3e-45b0-a2eb-b60275ee01df"
-            alt="Success"
-          />
+          <img src="../assets/icon-park-solid_success.svg" alt="Success" />
         </div>
         <div class="success-message">Leave Approved</div>
       </div>
