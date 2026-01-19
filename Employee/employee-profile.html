@@ -532,7 +532,22 @@
         </div>
 
         <!-- Log Out Button -->
-        <button class="btn-logout" onclick="handleLogout()">Log Out</button>
+        <button
+          id="logoutBtn"
+          type="button"
+          style="
+            background: transparent;
+            border: none;
+            color: #c50303;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 16px;
+            font-family: &quot;Graphik Trial&quot;, sans-serif;
+          "
+        >
+          Log Out
+        </button>
       </div>
 
       <!-- Bottom Navigation -->
@@ -612,7 +627,9 @@
         alert("Edit contact information form would open here");
         console.log("Edit contact info clicked");
       }
-
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", handleLogout);
       function handleLogout() {
         const confirmed = window.confirm("Are you sure you want to log out?");
         if (!confirmed) return;
