@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,8 +12,13 @@
       }
 
       body {
-        font-family: "Inter", "Graphik Trial", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
+        font-family:
+          "Inter",
+          "Graphik Trial",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
         background: #f5f7fa;
         display: flex;
         justify-content: center;
@@ -27,8 +32,8 @@
         width: 402px;
         height: 896px;
         background: #f5f7fa;
-        border-radius: 24px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        /* border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); */
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -115,19 +120,19 @@
       /* CALENDAR */
       .calendar-section {
         background: #f5f7fa;
-        padding: 16px 24px;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+        padding: 12px 24px;
+        border-bottom: none;
       }
 
       .calendar-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
       }
 
       .calendar-month {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
@@ -141,50 +146,54 @@
       .calendar-nav-btn {
         background: none;
         border: none;
-        color: #14b8a6;
-        font-size: 18px;
+        color: #0f172a;
+        font-size: 14px;
         cursor: pointer;
-        padding: 4px 8px;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0.6;
+        transition: opacity 0.2s;
       }
 
       .calendar-nav-btn:hover {
-        opacity: 0.7;
+        opacity: 1;
       }
 
       .calendar-days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 8px;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
       }
 
       .calendar-day {
-        padding: 8px 4px;
+        padding: 4px 8px;
         text-align: center;
         font-size: 12px;
         font-weight: 300;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
-        border-radius: 8px;
+        border-radius: 6px;
         background: transparent;
+        min-width: 28px;
       }
 
       .calendar-day-name {
-        padding: 8px 4px;
+        padding: 4px 8px;
         text-align: center;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 300;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
-        border-radius: 8px;
+        border-radius: 6px;
+        min-width: 28px;
       }
 
       .calendar-day.active {
         background: #14b8a6;
         color: #0f172a;
-        font-weight: 500;
+        font-weight: 400;
       }
 
       /* MAIN CONTENT */
@@ -202,8 +211,10 @@
         background: #ffffff;
         border-radius: 8px;
         padding: 12px;
-        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0),
-          0px 0px 1px rgba(0, 0, 0, 0.01), 0px 0px 1px rgba(0, 0, 0, 0.05),
+        box-shadow:
+          0px 0px 1px rgba(0, 0, 0, 0),
+          0px 0px 1px rgba(0, 0, 0, 0.01),
+          0px 0px 1px rgba(0, 0, 0, 0.05),
           0px 0px 1px rgba(0, 0, 0, 0.09);
         display: flex;
         flex-direction: column;
@@ -404,7 +415,9 @@
         font-weight: 500;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
-        transition: background 0.3s, transform 0.1s;
+        transition:
+          background 0.3s,
+          transform 0.1s;
         margin-top: auto;
       }
 
@@ -428,7 +441,7 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 378px;
+        width: 402px;
         max-width: 100%;
         height: 108px;
         background-color: #f5f7fa;
@@ -516,7 +529,7 @@
 
       <!-- Header -->
       <div class="header">
-        <button class="header-back-btn" onclick="goBack()">&lt;</button>
+        <!-- <button class="header-back-btn" onclick="goBack()">&lt;</button> -->
         <div class="header-content">
           <div class="header-title">Confirm Daily Log</div>
           <div class="header-subtitle">Review and confirm your daily task</div>
@@ -684,7 +697,7 @@
         const daysInMonth = new Date(
           currentYear,
           currentMonth + 1,
-          0
+          0,
         ).getDate();
 
         const calendarContainer = document.getElementById("calendarDays");
@@ -744,11 +757,10 @@
         const diffS = Math.floor((diffMs % 60000) / 1000);
 
         const timerStr = `${String(diffH).padStart(2, "0")}h:${String(
-          diffM
+          diffM,
         ).padStart(2, "0")}m:${String(diffS).padStart(2, "0")}s`;
-        document.getElementById(
-          "clockTimer"
-        ).textContent = `Timer: ${timerStr}`;
+        document.getElementById("clockTimer").textContent =
+          `Timer: ${timerStr}`;
       }
 
       function updateTime() {

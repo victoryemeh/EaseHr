@@ -16,15 +16,21 @@
         font-family: "Graphik Trial", "Inter", sans-serif;
         background-color: #f5f7fa;
         color: #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 0 12px;
       }
 
       .container {
-        width: 600px;
-        max-width: 100%;
+        width: 100%;
+        max-width: 540px;
         margin: 0 auto;
         background-color: #f5f7fa;
         position: relative;
         min-height: 100vh;
+        padding-bottom: 140px;
       }
 
       /* Status Bar */
@@ -63,6 +69,7 @@
         align-items: center;
         gap: 12px;
         padding: 24px;
+        margin-top: 48px;
         background-color: #f5f7fa;
       }
 
@@ -103,7 +110,7 @@
         gap: 16px;
         padding: 0 24px 24px 24px;
         overflow-y: auto;
-        max-height: calc(100vh - 200px);
+        max-height: calc(100vh - 220px);
       }
 
       /* Card Styles */
@@ -307,15 +314,14 @@
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 600px;
+        width: 540px;
         max-width: 100%;
-        height: 108px;
-        background-color: white;
-        border-top: 1px solid #0f172a;
+        background-color: #f5f7fa;
+        border-top: 1px solid rgba(15, 23, 42, 0.1);
         display: flex;
         justify-content: space-around;
-        align-items: flex-start;
-        padding: 12px;
+        align-items: center;
+        padding: 12px 16px 18px 16px;
         box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
       }
 
@@ -347,8 +353,29 @@
         color: #14b8a6;
       }
 
-      body {
-        padding-bottom: 120px;
+      /* ===========================
+           Responsive
+           =========================== */
+      @media (max-width: 600px) {
+        body {
+          padding: 0 8px;
+        }
+
+        .container {
+          max-width: 100%;
+          padding-bottom: 140px;
+        }
+
+        .header-section,
+        .content {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .bottom-nav {
+          width: 100%;
+          padding: 12px 12px 18px 12px;
+        }
       }
     </style>
   </head>
@@ -539,7 +566,7 @@
         <div>
           <h3 class="quick-actions-title">Quick Actions</h3>
           <div class="actions-grid">
-            <a href="leave-management.html" class="action-card">
+            <a href="leave-app-mgt.html" class="action-card">
               <img
                 src="https://www.figma.com/api/mcp/asset/15ff412b-07c2-4e18-8752-da1d2ab53824"
                 alt="Leave"
@@ -549,7 +576,7 @@
               <span class="action-description">Approve leave</span>
             </a>
 
-            <a href="#" class="action-card">
+            <a href="task-assignment.html" class="action-card">
               <img
                 src="https://www.figma.com/api/mcp/asset/427480c5-9d3e-4309-b20b-09768c943463"
                 alt="Tasks"
@@ -559,7 +586,7 @@
               <span class="action-description">Assign task to staff.</span>
             </a>
 
-            <div class="action-card">
+            <a href="staff-availablity.html" class="action-card">
               <img
                 src="https://www.figma.com/api/mcp/asset/427480c5-9d3e-4309-b20b-09768c943463"
                 alt="Attendance"
@@ -567,9 +594,9 @@
               />
               <span class="action-title">Attendance</span>
               <span class="action-description">View Clock in Attendance</span>
-            </div>
+            </a>
 
-            <a href="#" class="action-card">
+            <a href="staff-availablity.html" class="action-card">
               <img
                 src="https://www.figma.com/api/mcp/asset/b009d22f-75f6-4d0a-aae3-a88d54c54f68"
                 alt="Oversight"
@@ -616,7 +643,26 @@
     </div>
 
     <script>
-      // Placeholder for future functionality
+      // ===========================
+      // Navigation Active State
+      // ===========================
+      function setActiveNavItem() {
+        const currentPage =
+          window.location.pathname.split("/").pop() || "dashboard.html";
+        const navItems = document.querySelectorAll(".bottom-nav .nav-item");
+
+        navItems.forEach((item) => {
+          item.classList.remove("active");
+          const href = item.getAttribute("href");
+          if (href && href.includes(currentPage)) {
+            item.classList.add("active");
+          }
+        });
+      }
+
+      // Set active nav on page load
+      setActiveNavItem();
+
       console.log("Manager Dashboard Loaded");
     </script>
   </body>

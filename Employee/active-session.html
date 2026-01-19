@@ -37,8 +37,8 @@
         width: 402px;
         height: 896px;
         background: #f5f7fa;
-        border-radius: 24px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        /* border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); */
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -110,19 +110,19 @@
       /* CALENDAR */
       .calendar-section {
         background: #f5f7fa;
-        padding: 16px 24px;
-        border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+        padding: 12px 24px;
+        border-bottom: none;
       }
 
       .calendar-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
       }
 
       .calendar-month {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
@@ -136,50 +136,54 @@
       .calendar-nav-btn {
         background: none;
         border: none;
-        color: #14b8a6;
-        font-size: 18px;
+        color: #0f172a;
+        font-size: 14px;
         cursor: pointer;
-        padding: 4px 8px;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0.6;
+        transition: opacity 0.2s;
       }
 
       .calendar-nav-btn:hover {
-        opacity: 0.7;
+        opacity: 1;
       }
 
       .calendar-days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 8px;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
       }
 
       .calendar-day {
-        padding: 8px 4px;
+        padding: 4px 8px;
         text-align: center;
         font-size: 12px;
         font-weight: 300;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
-        border-radius: 8px;
+        border-radius: 6px;
         background: transparent;
+        min-width: 28px;
       }
 
       .calendar-day-name {
-        padding: 8px 4px;
+        padding: 4px 8px;
         text-align: center;
         font-size: 12px;
-        font-weight: 400;
+        font-weight: 300;
         color: #0f172a;
         font-family: "Graphik Trial", sans-serif;
-        border-radius: 8px;
+        border-radius: 6px;
+        min-width: 28px;
       }
 
       .calendar-day.active {
         background: #14b8a6;
         color: #0f172a;
-        font-weight: 500;
+        font-weight: 400;
       }
 
       /* MAIN CONTENT */
