@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,8 +21,13 @@
       }
 
       body {
-        font-family: "Graphik Trial", "Inter", -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
+        font-family:
+          "Graphik Trial",
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
         background: var(--bg);
         display: flex;
         justify-content: center;
@@ -183,7 +188,7 @@
       .details-toggle {
         width: 16px;
         height: 16px;
-        transform: rotate(270deg);
+        transform: rotate(180deg);
         cursor: pointer;
       }
 
@@ -265,7 +270,7 @@
         display: flex;
         justify-content: space-between;
         padding: 12px;
-        width:500px;
+        width: 500px;
         height: 108px;
         border-top: 1px solid rgba(15, 23, 42, 0.08);
         background: #ffffff;
@@ -320,13 +325,13 @@
 
       <!-- Header -->
       <div class="header">
-        <a href="leave-management.html">
+        <!-- <a href="leave-management.html">
           <img
             class="back-btn"
             src="https://www.figma.com/api/mcp/asset/76daa3d3-ba53-48f3-87ae-693259c41165"
             alt="Back"
           />
-        </a>
+        </a> -->
         <div class="header-title">Leave Application</div>
       </div>
 
@@ -335,10 +340,7 @@
         <!-- Employee Profile Card -->
         <div class="card profile-card">
           <div class="profile-avatar">
-            <img
-              src="https://www.figma.com/api/mcp/asset/5d36fdf6-defc-4ec0-a617-ac9906b06500"
-              alt="Avatar"
-            />
+            <img src="../assets/princess favour.svg" alt="Avatar" />
           </div>
           <div class="profile-info">
             <div class="profile-name">Name: Princess Favour</div>
@@ -363,7 +365,7 @@
             <div class="details-title">Application Details</div>
             <img
               class="details-toggle"
-              src="https://www.figma.com/api/mcp/asset/4fbe3326-677c-4aed-857d-f1fb74f50b89"
+              src="../assets/dropdown.svg"
               alt="Toggle"
             />
           </div>
@@ -397,8 +399,8 @@
 
       <!-- Buttons Section -->
       <div class="buttons-section">
-        <button class="btn btn-approve">Approve</button>
-        <button class="btn btn-reject">Reject</button>
+        <button class="btn btn-approve" onclick="location.href = 'approval-confirmation.html'">Approve</button>
+        <button class="btn btn-reject" >Reject</button>
       </div>
 
       <!-- Bottom Navigation -->

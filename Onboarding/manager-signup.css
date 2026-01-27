@@ -15,7 +15,7 @@ body {
 
 #easehr {
   width: 100%;
-  max-width: 390px;
+  max-width: 500px;
   background: #f5f7fa;
   padding: 18px 12px 28px;
   min-height: 100vh;
@@ -30,7 +30,7 @@ body {
 
   padding: 18px 18px 32px;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .logo-image {
